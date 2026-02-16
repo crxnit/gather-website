@@ -97,6 +97,31 @@
   }
 }
 
+/* Banner hero — full brand image replaces separate logo + text */
+.hero--banner {
+  padding-block: var(--space-md) 0;
+}
+
+.hero__banner {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  margin-inline: auto;
+  border-radius: var(--radius-md);
+}
+
+@media (min-width: 768px) {
+  .hero--banner {
+    padding-block: var(--space-lg) 0;
+  }
+
+  .hero__banner {
+    max-width: 800px;
+    border-radius: var(--radius-lg);
+  }
+}
+
 /* Homepage services intro */
 .services-intro {
   text-align: center;
