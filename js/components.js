@@ -84,8 +84,7 @@
       '</nav>' +
       '<div class="footer-external">' +
         '<a href="https://www.theknot.com/marketplace/gather-from-dawn-to-dusk-cincinnati-oh-2101040" target="_blank" rel="noopener noreferrer">The Knot</a>' +
-        '<!-- PLACEHOLDER: Replace # with actual Wedding Wire profile URL -->' +
-        '<a href="#" target="_blank" rel="noopener noreferrer">Wedding Wire</a>' +
+        '<a href="https://www.weddingwire.com/biz/gather-from-dawn-to-dusk/4e3cac205c612625.html" target="_blank" rel="noopener noreferrer">Wedding Wire</a>' +
       '</div>' +
       '<div class="footer-contact">' +
         '<a href="mailto:info@gathercateringandevents.com">info@gathercateringandevents.com</a>' +
