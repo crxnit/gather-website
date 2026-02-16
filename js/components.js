@@ -82,9 +82,9 @@
       '<nav class="footer-links" aria-label="Footer navigation">' +
         buildFooterLinks() +
       '</nav>' +
-      '<!-- PLACEHOLDER: Replace # with actual The Knot and Wedding Wire profile URLs -->' +
       '<div class="footer-external">' +
-        '<a href="#" target="_blank" rel="noopener noreferrer">The Knot</a>' +
+        '<a href="https://www.theknot.com/marketplace/gather-from-dawn-to-dusk-cincinnati-oh-2101040" target="_blank" rel="noopener noreferrer">The Knot</a>' +
+        '<!-- PLACEHOLDER: Replace # with actual Wedding Wire profile URL -->' +
         '<a href="#" target="_blank" rel="noopener noreferrer">Wedding Wire</a>' +
       '</div>' +
       '<div class="footer-contact">' +
