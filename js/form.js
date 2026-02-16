@@ -14,7 +14,7 @@
   'use strict';
 
   // TODO: Replace with your deployed Google Apps Script web app URL
-  const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwUH7jthn3EY6KDeBh8dcATLIEG0f2hxWClqBW8SwxoAge7t4xf-p1s5AzYOE0ns04/exec';
 
   /** Guard: prevent submission if the Apps Script URL hasn't been configured. */
   function isConfigured() {
