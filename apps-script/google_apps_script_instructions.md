@@ -5,7 +5,7 @@ These instructions walk through deploying the Gather inquiry form handler (`Code
 ## Prerequisites
 
 - A Google account with access to Google Workspace (the account that owns `catering@gathercateringandevents.com`)
-- The Google Sheet for logging inquiries (already created — ID: `1KisP_roGHGIv5TTl8v3bQEKjF5jJTrSVHeE2QecdxI0`)
+- The Google Sheet for logging inquiries (already created — find the ID in `apps-script/config.gs`)
 
 ## Step 1: Create the Apps Script Project
 
@@ -20,7 +20,10 @@ These instructions walk through deploying the Gather inquiry form handler (`Code
 2. **Select all** the default code and **delete it**
 3. Open the file `apps-script/Code.gs` from the website repository
 4. **Copy the entire contents** and **paste it** into the Apps Script editor
-5. Click the **save icon** (or press Ctrl+S / Cmd+S)
+5. Click the **+** button next to "Files" in the left sidebar and select **"Script"**
+6. Name the new file **`config`** (it will become `config.gs`)
+7. Open `apps-script/config.gs` from the website repository (or `config.gs.example` if setting up fresh) and **paste its contents** into the new file
+8. Click the **save icon** (or press Ctrl+S / Cmd+S)
 
 ## Step 3: Verify Configuration
 
@@ -29,7 +32,7 @@ Before deploying, confirm these values at the top of `Code.gs` are correct:
 | Variable | Current Value | Description |
 |----------|--------------|-------------|
 | `NOTIFICATION_EMAIL` | `catering@gathercateringandevents.com` | Receives new lead notification emails |
-| `SPREADSHEET_ID` | `1KisP_roGHGIv5TTl8v3bQEKjF5jJTrSVHeE2QecdxI0` | Google Sheet where inquiries are logged |
+| `SPREADSHEET_ID` | *(set in `config.gs`)* | Google Sheet where inquiries are logged |
 | `CATERING_MANAGER_NAME` | `Liz French` | Name shown in the confirmation email sent to the customer |
 | `SENDER_NAME` | `Gather Catering and Events` | "From" name on confirmation emails |
 | `SHEET_NAME` | `Inquiry Submissions` | Tab name created in the Google Sheet |
@@ -57,16 +60,16 @@ Before deploying, confirm these values at the top of `Code.gs` are correct:
 
 ## Step 5: Connect the Website to the Deployed Script
 
-1. Open the file `js/form.js` in the website repository
-2. Find this line near the top:
+1. Copy `js/config.js.example` to `js/config.js`
+2. Open `js/config.js` and replace `YOUR_APPS_SCRIPT_URL_HERE` with the URL you copied in Step 4:
    ```javascript
-   const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+   var GATHER_CONFIG = {
+     APPS_SCRIPT_URL: 'https://script.google.com/macros/s/XXXXXXXXXXXXX/exec'
+   };
    ```
-3. Replace `YOUR_APPS_SCRIPT_URL_HERE` with the URL you copied in Step 4:
-   ```javascript
-   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/XXXXXXXXXXXXX/exec';
-   ```
-4. Save the file
+3. Save the file
+
+> **Note:** `js/config.js` is gitignored — it will not be committed to the repository.
 
 ## Step 6: Test the Form
 
@@ -82,7 +85,7 @@ Before deploying, confirm these values at the top of `Code.gs` are correct:
 
 | # | Action | How to verify |
 |---|--------|---------------|
-| 1 | Google Sheet entry | Open the [Google Sheet](https://docs.google.com/spreadsheets/d/1KisP_roGHGIv5TTl8v3bQEKjF5jJTrSVHeE2QecdxI0/edit) and check for a new row in the "Inquiry Submissions" tab |
+| 1 | Google Sheet entry | Open the Google Sheet (see `apps-script/config.gs` for the ID) and check for a new row in the "Inquiry Submissions" tab |
 | 2 | Confirmation email | Check the inbox of the email address you used in the form |
 | 3 | Lead notification | Check the `catering@gathercateringandevents.com` inbox for a "New Website Lead - Test User" email |
 | 4 | On-site message | Confirm a green success message appeared on the form page |

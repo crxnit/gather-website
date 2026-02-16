@@ -1,2 +1,6 @@
 .DS_Store
 archive/
+
+# Deployment-specific config (contains API keys / IDs)
+js/config.js
+apps-script/config.gs

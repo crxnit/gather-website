@@ -1,0 +1,9 @@
+/**
+ * Apps Script configuration — contains deployment-specific values.
+ * Copy this file to config.gs and fill in the values.
+ *
+ * When deploying, paste this file's contents into a separate
+ * config.gs file in the Apps Script editor alongside Code.gs.
+ */
+
+var SPREADSHEET_ID = 'YOUR_SPREADSHEET_ID_HERE';

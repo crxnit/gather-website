@@ -13,8 +13,8 @@
 (function () {
   'use strict';
 
-  // TODO: Replace with your deployed Google Apps Script web app URL
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwUH7jthn3EY6KDeBh8dcATLIEG0f2hxWClqBW8SwxoAge7t4xf-p1s5AzYOE0ns04/exec';
+  // Read the Apps Script URL from config.js (loaded before this script).
+  const APPS_SCRIPT_URL = (typeof GATHER_CONFIG !== 'undefined' && GATHER_CONFIG.APPS_SCRIPT_URL) || '';
 
   /** Guard: prevent submission if the Apps Script URL hasn't been configured. */
   function isConfigured() {

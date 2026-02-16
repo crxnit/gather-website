@@ -23,9 +23,8 @@ var NOTIFICATION_EMAIL = 'catering@gathercateringandevents.com';
 /** Public-facing sender name on confirmation emails. */
 var SENDER_NAME = 'Gather Catering and Events';
 
-// PLACEHOLDER: Replace with the ID from your Google Sheet URL
-// e.g. https://docs.google.com/spreadsheets/d/THIS_PART_IS_THE_ID/edit
-var SPREADSHEET_ID = '1KisP_roGHGIv5TTl8v3bQEKjF5jJTrSVHeE2QecdxI0';
+// SPREADSHEET_ID is defined in config.gs (not committed to version control).
+// See config.gs.example for the template.
 
 var SHEET_NAME = 'Inquiry Submissions';
 
