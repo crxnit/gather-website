@@ -66,8 +66,8 @@
   --container-max: 1200px;
   --container-narrow: 800px;
   --container-text: 600px;
-  --container-padding: var(--space-lg);
-  --header-height: 80px;
+  --container-padding: var(--space-md);
+  --header-height: 64px;
 
   /* Border radius */
   --radius-sm: 4px;
@@ -80,8 +80,19 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
 
+  /* Touch target minimum */
+  --tap-min: 44px;
+
   /* Transitions */
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
   --transition-slow: 400ms ease;
+}
+
+/* Tablet and up: increase container padding and header height */
+@media (min-width: 768px) {
+  :root {
+    --container-padding: var(--space-lg);
+    --header-height: 80px;
+  }
 }

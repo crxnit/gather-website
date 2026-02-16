@@ -50,6 +50,7 @@
 .nav-dropdown-toggle {
   display: flex;
   align-items: center;
+  min-height: var(--tap-min);
   padding: var(--space-sm) var(--space-md);
   color: var(--color-text);
   font-family: var(--font-accent);
@@ -88,7 +89,10 @@
 }
 
 .nav-cta {
-  margin-left: var(--space-sm);
+  margin-top: var(--space-sm);
+  width: 100%;
+  text-align: center;
+  justify-content: center;
 }
 
 /* Services dropdown */
@@ -137,6 +141,8 @@
   border: none;
   cursor: pointer;
   padding: var(--space-sm);
+  min-width: var(--tap-min);
+  min-height: var(--tap-min);
   z-index: 101;
 }
 
@@ -192,6 +198,12 @@
     gap: 0;
   }
 
+  .nav-cta {
+    margin-top: 0;
+    margin-left: var(--space-sm);
+    width: auto;
+  }
+
   /* Desktop dropdown */
   .nav-dropdown-menu {
     position: absolute;
@@ -219,7 +231,7 @@ main {
 
 /* Section spacing */
 .section {
-  padding-block: var(--space-3xl);
+  padding-block: var(--space-2xl);
 }
 
 @media (min-width: 768px) {
@@ -231,7 +243,13 @@ main {
 /* Grid utilities */
 .grid {
   display: grid;
-  gap: var(--space-xl);
+  gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    gap: var(--space-xl);
+  }
 }
 
 .grid--services {
@@ -264,8 +282,15 @@ main {
 .site-footer {
   background-color: var(--color-bg-footer);
   border-top: 1px solid var(--color-border);
-  padding-block: var(--space-2xl);
-  margin-top: var(--space-3xl);
+  padding-block: var(--space-xl);
+  margin-top: var(--space-2xl);
+}
+
+@media (min-width: 768px) {
+  .site-footer {
+    padding-block: var(--space-2xl);
+    margin-top: var(--space-3xl);
+  }
 }
 
 .footer-inner {
@@ -305,7 +330,13 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: var(--space-md) var(--space-xl);
+  gap: var(--space-sm) var(--space-lg);
+}
+
+.footer-links a {
+  min-height: var(--tap-min);
+  display: inline-flex;
+  align-items: center;
 }
 
 .footer-external {
@@ -318,6 +349,7 @@ main {
   display: flex;
   align-items: center;
   gap: var(--space-xs);
+  min-height: var(--tap-min);
 }
 
 .footer-contact {
@@ -349,5 +381,6 @@ main {
 
   .footer-links {
     justify-content: flex-start;
+    gap: var(--space-md) var(--space-xl);
   }
 }
