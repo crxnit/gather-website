@@ -30,7 +30,7 @@ var SPREADSHEET_ID = '1KisP_roGHGIv5TTl8v3bQEKjF5jJTrSVHeE2QecdxI0';
 var SHEET_NAME = 'Inquiry Submissions';
 
 // PLACEHOLDER: Replace with the catering manager's actual name
-var CATERING_MANAGER_NAME = 'our catering manager';
+var CATERING_MANAGER_NAME = 'Liz French';
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
