@@ -1,0 +1,61 @@
+http:
+  # ── Routers ──────────────────────────────────────────────────────
+
+  routers:
+    # Primary domain
+    gather-main:
+      rule: "Host(`gathercateringandevents.com`) || Host(`www.gathercateringandevents.com`)"
+      entryPoints:
+        - websecure
+      service: gather-web
+      tls:
+        certResolver: letsencrypt
+
+    # Redirect alternate domain → primary
+    gather-redirect:
+      rule: "Host(`gathercafeandevents.com`) || Host(`www.gathercafeandevents.com`)"
+      entryPoints:
+        - websecure
+      service: noop@internal
+      tls:
+        certResolver: letsencrypt
+      middlewares:
+        - gather-redirect-to-primary
+
+    # HTTP → HTTPS (if not handled globally by Traefik)
+    gather-http:
+      rule: "Host(`gathercateringandevents.com`) || Host(`www.gathercateringandevents.com`) || Host(`gathercafeandevents.com`) || Host(`www.gathercafeandevents.com`)"
+      entryPoints:
+        - web
+      middlewares:
+        - gather-https-redirect
+      service: noop@internal
+
+  # ── Middlewares ───────────────────────────────────────────────────
+
+  middlewares:
+    gather-redirect-to-primary:
+      redirectRegex:
+        regex: "^https?://(?:www\\.)?gathercafeandevents\\.com(.*)"
+        replacement: "https://gathercateringandevents.com${1}"
+        permanent: true
+
+    gather-https-redirect:
+      redirectScheme:
+        scheme: https
+        permanent: true
+
+    # Strip www from primary domain (optional — uncomment if desired)
+    # gather-strip-www:
+    #   redirectRegex:
+    #     regex: "^https?://www\\.gathercateringandevents\\.com(.*)"
+    #     replacement: "https://gathercateringandevents.com${1}"
+    #     permanent: true
+
+  # ── Services ─────────────────────────────────────────────────────
+
+  services:
+    gather-web:
+      loadBalancer:
+        servers:
+          - url: "http://gather-web:80"
