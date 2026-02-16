@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request a Quote — Gather Catering and Events</title>
+  <meta name="description" content="Get in touch with Gather Catering and Events. Fill out our inquiry form to request a quote for event planning, catering, bartending, and more.">
+  <link rel="icon" type="image/png" href="images/logos/sm/Gather.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:wght@400;500;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main>
+    <section class="inquiry-page">
+      <div class="container">
+        <h1>Request a Quote</h1>
+        <p class="inquiry-page__intro text-subdued">Tell us about your event and we'll get back to you within 24–48 hours. All fields marked with * are required.</p>
+
+        <div id="form-message" role="status" aria-live="polite"></div>
+
+        <form id="inquiry-form" class="inquiry-form" novalidate>
+          <!-- Name -->
+          <div class="inquiry-form__row">
+            <div class="form-group">
+              <label for="first-name" class="form-label form-label--required">First Name</label>
+              <input type="text" id="first-name" name="firstName" class="form-input" required autocomplete="given-name" aria-describedby="first-name-error">
+              <p class="form-field-error" id="first-name-error" role="alert">Please enter your first name.</p>
+            </div>
+            <div class="form-group">
+              <label for="last-name" class="form-label form-label--required">Last Name</label>
+              <input type="text" id="last-name" name="lastName" class="form-input" required autocomplete="family-name" aria-describedby="last-name-error">
+              <p class="form-field-error" id="last-name-error" role="alert">Please enter your last name.</p>
+            </div>
+          </div>
+
+          <!-- Contact -->
+          <div class="inquiry-form__row">
+            <div class="form-group">
+              <label for="email" class="form-label form-label--required">Email</label>
+              <input type="email" id="email" name="email" class="form-input" required autocomplete="email" aria-describedby="email-error">
+              <p class="form-field-error" id="email-error" role="alert">Please enter a valid email address.</p>
+            </div>
+            <div class="form-group">
+              <label for="phone" class="form-label">Phone</label>
+              <input type="tel" id="phone" name="phone" class="form-input" autocomplete="tel">
+            </div>
+          </div>
+
+          <!-- Services -->
+          <fieldset class="form-group">
+            <legend class="form-label">Services Interested In</legend>
+            <div class="checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" name="services" value="Full Planning">
+                Full Planning
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="services" value="Day-Of Coordinating">
+                "Day Of" Coordinating
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="services" value="Mobile Bartending">
+                Mobile Bartending
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="services" value="Catering">
+                Catering
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="services" value="Catering Staffing">
+                Catering Staffing
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- Budget -->
+          <div class="form-group">
+            <label for="budget" class="form-label">Budget</label>
+            <input type="text" id="budget" name="budget" class="form-input" placeholder="e.g. $2,000 – $5,000">
+          </div>
+
+          <!-- Details -->
+          <div class="form-group">
+            <label for="details" class="form-label">Additional Details</label>
+            <textarea id="details" name="details" class="form-textarea" rows="6" placeholder="Tell us about your event — date, location, guest count, any special requests..."></textarea>
+          </div>
+
+          <!-- Submit -->
+          <div class="text-center">
+            <button type="submit" class="btn btn--primary btn--lg" id="submit-btn">Send Inquiry</button>
+          </div>
+
+          <p class="inquiry-form__privacy">Your information is only used to respond to your inquiry and will never be shared with third parties.</p>
+
+          <p class="inquiry-form__fallback">Having trouble with the form? Email us directly at <a href="mailto:catering@gathercafeandevents.com">catering@gathercafeandevents.com</a></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/components.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/form.js"></script>
+</body>
+</html>

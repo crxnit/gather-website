@@ -1,0 +1,282 @@
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-xl);
+  font-family: var(--font-accent);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-align: center;
+}
+
+.btn--primary {
+  background-color: var(--color-rosewood);
+  color: var(--color-noodles);
+  border-color: var(--color-rosewood);
+}
+
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  background-color: var(--color-rosewood-light);
+  border-color: var(--color-rosewood-light);
+  color: #fff;
+}
+
+.btn--outline {
+  background-color: transparent;
+  color: var(--color-noodles);
+  border-color: var(--color-noodles);
+}
+
+.btn--outline:hover,
+.btn--outline:focus-visible {
+  background-color: var(--color-noodles);
+  color: var(--color-bg);
+}
+
+.btn--lg {
+  padding: var(--space-md) var(--space-2xl);
+  font-size: var(--text-lg);
+}
+
+/* Shared card base */
+.card {
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Service Cards */
+.service-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.service-card__image {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.service-card__image img {
+  transition: transform var(--transition-slow);
+}
+
+.service-card:hover .service-card__image img {
+  transform: scale(1.05);
+}
+
+.service-card__content {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.service-card__title {
+  font-size: var(--text-xl);
+  color: var(--color-title);
+  margin-bottom: var(--space-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.service-card__desc {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+  flex-grow: 1;
+}
+
+.service-card__link {
+  font-family: var(--font-accent);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-link);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  align-self: flex-start;
+}
+
+.service-card__link:hover {
+  color: var(--color-link-hover);
+}
+
+.service-card__link::after {
+  content: '\2192';
+  transition: transform var(--transition-fast);
+}
+
+.service-card__link:hover::after {
+  transform: translateX(4px);
+}
+
+/* Testimonial Cards */
+.testimonial-card {
+  padding: var(--space-xl);
+  border-left: 4px solid var(--color-rosewood);
+}
+
+.testimonial-card__quote {
+  font-size: var(--text-lg);
+  font-style: italic;
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-md);
+}
+
+.testimonial-card__quote::before {
+  content: '\201C';
+  font-size: var(--text-4xl);
+  color: var(--color-rosewood);
+  line-height: 0;
+  vertical-align: -0.4em;
+  margin-right: var(--space-xs);
+}
+
+.testimonial-card__author {
+  font-family: var(--font-accent);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-title);
+  font-size: var(--text-sm);
+}
+
+.testimonial-card__event {
+  font-size: var(--text-xs);
+  opacity: 0.7;
+  margin-top: var(--space-xs);
+}
+
+/* Form Elements */
+.form-group {
+  margin-bottom: var(--space-lg);
+}
+
+.form-label {
+  display: block;
+  font-family: var(--font-accent);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-title);
+  margin-bottom: var(--space-xs);
+}
+
+.form-label--required::after {
+  content: ' *';
+  color: var(--color-rosewood);
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-input-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-size: var(--text-base);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--color-noodles);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--color-input-placeholder);
+}
+
+.form-textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* Checkbox group */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-base);
+  cursor: pointer;
+  padding: var(--space-xs) 0;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-rosewood);
+  cursor: pointer;
+}
+
+/* Form messages */
+.form-message {
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-lg);
+  display: none;
+}
+
+.form-message--success {
+  display: block;
+  background-color: rgba(46, 204, 113, 0.15);
+  border: 1px solid rgba(46, 204, 113, 0.3);
+  color: var(--color-success-text);
+}
+
+.form-message--error {
+  display: block;
+  background-color: rgba(231, 76, 60, 0.15);
+  border: 1px solid rgba(231, 76, 60, 0.3);
+  color: var(--color-error-text);
+}
+
+.form-field-error {
+  font-size: var(--text-xs);
+  color: var(--color-error-text);
+  margin-top: var(--space-xs);
+  display: none;
+}
+
+.form-group.has-error .form-field-error {
+  display: block;
+}
+
+.form-group.has-error .form-input,
+.form-group.has-error .form-textarea {
+  border-color: rgba(231, 76, 60, 0.5);
+}
+
+/* Policy sections */
+.policy-section {
+  margin-bottom: var(--space-2xl);
+}
+
+.policy-section h2 {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);
+}

@@ -1,0 +1,75 @@
+Gather Website Requirements Session - 02/12/2026
+-----------------------
+Attendees:
+- John O'Connor (Facilitator)
+- Jared Dempsey
+- Josh Peebles
+
+Current URLs
+gathercateringandevents.com
+gathercafeandevents.com
+
+
+UX/UI - User Interface
+Fonts: 
+-- "Abril Fatface" <-- GATHER wording
+-- "Lucida Calligraphy" <-- From Dawn to Dusk
+-- "Source Sans Pro" <-- "Catering and Event Services"
+-- "Poppins" <-- Business Card Info
+
+Main Website Font: "Source Sans Pro"
+
+
+Colors:
+Background Color: #2C3E50 (Midnight Blue)
+Text Title Color: #F9E3B4 (Noodles)
+General Text Color: #C9D6EA (light steel blue)
+Link Color:  #7F515F (Rosewood / Muted Rose)
+Link Highlight Color: #F9E3B4 (Noodles)
+
+Layout:
+Pictures for services:
+ - Full Planning
+ - "Day Of" Coordinating
+ - Mobile Bartending
+ - Catering
+ - Catering Staffing 
+
+ 
+- Each service should have its own page.
+- On the main page, each picture has a brief description of the service .. end user clicks and is taken to the page.
+
+Other Pages:
+ - About us
+ - Photo Gallery
+ - Testimonials
+ - FAQs / Common Questions page
+    - Traveling
+ - Policies 
+ 
+Dynamic Functionality:
+ - Inquiry Form (see gather.jjocapps.com)
+    make it less wedding based (more generic)
+    list out the services and they can check off
+    - add budget (not a drop down ... but a write in)
+    - add a open commentary field
+    - 
+    When the form is filled out ... an email goes to "catering@gathercafeandevents.com"
+    - add all the functionality that happened with the wedding form.
+ - the knot, wedding wire icons that link directly to those pages
+
+    
+    
+Josh / Liz / Ambriel -
+- Provide Artwork / Pictures for the services.
+- Description for each service (Liz will send - already done!)
+- Text for About us - Josh (josh to send me the links wedding wire, etc.)
+- the Knot Reviews
+
+Future Versions:
+- socials
+- FAQs (we will go live without the FAQs)
+- Photo Gallery
+- Pop Ups (Future - not now)
+
+ 

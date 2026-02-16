@@ -1,0 +1,104 @@
+/* Typography & Global Styles */
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+h1, h2, h3 {
+  color: var(--color-title);
+  font-weight: var(--font-weight-semibold);
+}
+
+h1 {
+  font-size: var(--text-5xl);
+  margin-bottom: var(--space-lg);
+}
+
+h2 {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-md);
+}
+
+h3 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-sm);
+}
+
+p {
+  margin-bottom: var(--space-md);
+  line-height: var(--line-height-relaxed);
+}
+
+a {
+  color: var(--color-link);
+  transition: color var(--transition-fast);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--color-link-hover);
+}
+
+strong {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Brand wordmark */
+.brand-wordmark {
+  font-family: var(--font-brand);
+  color: var(--color-title);
+  letter-spacing: 0.05em;
+}
+
+/* Tagline */
+.brand-tagline {
+  font-family: var(--font-tagline);
+  color: var(--color-text);
+  font-style: italic;
+}
+
+/* Focus visible styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-noodles);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-rosewood);
+  color: var(--color-noodles);
+}
+
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Utility: text alignment */
+.text-center {
+  text-align: center;
+}
+
+/* Utility: subdued intro text */
+.text-subdued {
+  max-width: var(--container-text);
+  margin-inline: auto;
+  opacity: 0.85;
+}
+
+/* Utility: cover image */
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
