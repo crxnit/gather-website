@@ -86,6 +86,8 @@
         '<a href="https://www.theknot.com/marketplace/gather-from-dawn-to-dusk-cincinnati-oh-2101040" target="_blank" rel="noopener noreferrer">The Knot</a>' +
         '<a href="https://www.weddingwire.com/biz/gather-from-dawn-to-dusk/4e3cac205c612625.html" target="_blank" rel="noopener noreferrer">Wedding Wire</a>' +
       '</div>' +
+      '<!-- PLACEHOLDER: Paste The Knot / Wedding Wire badge embed codes inside footer-badges -->' +
+      '<div class="footer-badges" id="footer-badges"></div>' +
       '<div class="footer-contact">' +
         '<a href="mailto:info@gathercateringandevents.com">info@gathercateringandevents.com</a>' +
       '</div>' +

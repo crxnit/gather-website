@@ -350,6 +350,24 @@ main {
   min-height: var(--tap-min);
 }
 
+/* Vendor badges (The Knot, Wedding Wire, etc.) */
+.footer-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.footer-badges:empty {
+  display: none;
+}
+
+.footer-badges img {
+  max-height: 80px;
+  width: auto;
+}
+
 .footer-contact {
   font-size: var(--text-sm);
   color: var(--color-text);
@@ -380,5 +398,10 @@ main {
   .footer-links {
     justify-content: flex-start;
     gap: var(--space-md) var(--space-xl);
+  }
+
+  .footer-badges {
+    flex-basis: 100%;
+    justify-content: center;
   }
 }
