@@ -55,7 +55,7 @@
         body: JSON.stringify(data)
       })
         .then(function () {
-          showMessage('success', 'Thank you! Your inquiry has been sent. We\'ll get back to you within 24\u201348 hours.');
+          showMessage('success', 'Thank you! Your inquiry has been sent and a confirmation email is on its way. Our team will follow up within 24\u201348 business hours.');
           form.reset();
         })
         .catch(function () {
