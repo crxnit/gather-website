@@ -15,7 +15,7 @@
  * SpreadsheetApp.openById('YOUR_SHEET_ID').
  */
 
-var RECIPIENT_EMAIL = 'catering@gathercafeandevents.com';
+var RECIPIENT_EMAIL = 'info@gathercateringandevents.com';
 var SHEET_NAME = 'Inquiry Submissions';
 
 /**

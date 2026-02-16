@@ -6,8 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Website for **Gather Catering and Events** — a catering and event services business.
 
-- Domains: gathercateringandevents.com, gathercafeandevents.com
-- Contact email: catering@gathercafeandevents.com
+- Domains: gathercateringandevents.com (preferred), gathercafeandevents.com
+- Contact email: info@gathercateringandevents.com
 - Requirements doc: `gatherwebsite-requirements.txt`
 
 ## Architecture
@@ -15,14 +15,14 @@ Website for **Gather Catering and Events** — a catering and event services bus
 | Layer | Technology |
 |-------|------------|
 | Frontend | Plain HTML/CSS/JS — no framework, no build step |
-| Email/Forms | Google Apps Script → Google Workspace (catering@gathercafeandevents.com) |
+| Email/Forms | Google Apps Script → Google Workspace (info@gathercateringandevents.com) |
 | Hosting | Self-hosted Linux containers: Traefik (SSL + reverse proxy) → Nginx (static files) |
 | Backend | None initially; FastAPI container available if future features need it |
 
 ### Form Submission Flow
 1. User fills out inquiry form on the website
 2. Client-side JS POSTs form data to a deployed Google Apps Script web app URL
-3. Apps Script parses the data and sends email via Google Workspace to catering@gathercafeandevents.com
+3. Apps Script parses the data and sends email via Google Workspace to info@gathercateringandevents.com
 4. Optionally logs submissions to a Google Sheet
 
 ### Deployment
@@ -63,7 +63,7 @@ Static HTML/CSS/JS files are served directly by Nginx. No build step — edit an
 - Policies
 
 ### Dynamic Functionality
-- **Inquiry Form**: Generic (not wedding-focused), with service checkboxes, write-in budget field, open commentary field. Submits via email to catering@gathercafeandevents.com. Reference: gather.jjocapps.com
+- **Inquiry Form**: Generic (not wedding-focused), with service checkboxes, write-in budget field, open commentary field. Submits via email to info@gathercateringandevents.com. Reference: gather.jjocapps.com
 - **External Links**: The Knot and Wedding Wire icons linking to their profiles
 
 ### Future Versions

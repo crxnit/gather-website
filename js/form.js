@@ -38,7 +38,7 @@
       if (!validate()) return;
 
       if (!isConfigured()) {
-        showMessage('error', 'The inquiry form is not yet configured. Please email us directly at catering@gathercafeandevents.com');
+        showMessage('error', 'The inquiry form is not yet configured. Please email us directly at info@gathercateringandevents.com');
         return;
       }
 
@@ -59,7 +59,7 @@
           form.reset();
         })
         .catch(function () {
-          showMessage('error', 'Something went wrong. Please try again or email us directly at catering@gathercafeandevents.com');
+          showMessage('error', 'Something went wrong. Please try again or email us directly at info@gathercateringandevents.com');
         })
         .finally(function () {
           isSubmitting = false;

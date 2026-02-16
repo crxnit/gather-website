@@ -88,7 +88,7 @@
         '<a href="#" target="_blank" rel="noopener noreferrer">Wedding Wire</a>' +
       '</div>' +
       '<div class="footer-contact">' +
-        '<a href="mailto:catering@gathercafeandevents.com">catering@gathercafeandevents.com</a>' +
+        '<a href="mailto:info@gathercateringandevents.com">info@gathercateringandevents.com</a>' +
       '</div>' +
       '<div class="footer-copyright">' +
         '&copy; ' + new Date().getFullYear() + ' Gather Catering and Events. All rights reserved.' +
