@@ -256,13 +256,20 @@ main {
 
 @media (min-width: 768px) {
   .grid--services {
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-xl);
+  }
+
+  .grid--services > * {
+    width: calc(50% - var(--space-xl) / 2);
   }
 }
 
 @media (min-width: 1024px) {
-  .grid--services {
-    grid-template-columns: repeat(3, 1fr);
+  .grid--services > * {
+    width: calc(33.333% - var(--space-xl) * 2 / 3);
   }
 }
 

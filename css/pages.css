@@ -56,7 +56,7 @@
 /* ── Full-width hero — Together & Co style ── */
 .hero-full {
   position: relative;
-  min-height: 70vh;
+  min-height: 35vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -86,8 +86,8 @@
   position: relative;
   z-index: 1;
   text-align: center;
-  max-width: 720px;
-  padding: var(--space-3xl) var(--container-padding);
+  max-width: 900px;
+  padding: var(--space-xl) var(--container-padding);
 }
 
 .hero-full__logo {
@@ -109,7 +109,7 @@
 
 .hero-full__heading {
   font-family: var(--font-brand);
-  font-size: clamp(1.75rem, 5vw, 3rem);
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
   color: #fff;
   line-height: 1.2;
   margin-bottom: var(--space-lg);
@@ -125,7 +125,7 @@
 
 @media (min-width: 768px) {
   .hero-full {
-    min-height: 80vh;
+    min-height: 45vh;
   }
 
   .hero-full__logo {
