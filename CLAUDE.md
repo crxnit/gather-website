@@ -26,7 +26,10 @@ Website for **Gather Catering and Events** — a catering and event services bus
 4. Optionally logs submissions to a Google Sheet
 
 ### Deployment
-Static HTML/CSS/JS files are served directly by Nginx. No build step — edit and deploy.
+- Static HTML/CSS/JS files are served directly by Nginx. No build step — edit and deploy.
+- Repository: `github.com/crxnit/gather-website` (public, HTTPS clone)
+- Server preview directory: `gather-preview`
+- Browser caching is disabled via meta tags on all pages (for active development)
 
 ## Design System
 
@@ -45,6 +48,15 @@ Static HTML/CSS/JS files are served directly by Nginx. No build step — edit an
 | Noodles | #F9E3B4 | Title text, link highlight |
 | Light Steel Blue | #C9D6EA | General text |
 | Rosewood/Muted Rose | #7F515F | Links |
+
+## Homepage Layout
+
+Inspired by [togetherandco.com](https://togetherandco.com). Sections in order:
+
+1. **Full-width hero** (`hero-full`) — compact (35–45vh) background image (`display-table-closeup.jpg`) with dark gradient overlay, centered logo, tagline, heading, and description (no CTA button)
+2. **Services grid** — 5 service cards (image + title + description + "Learn More" link) in a centered flexbox layout (1→2→3 columns)
+3. **Testimonials** (`section--alt`) — 3 testimonial cards with star ratings in a 3-column grid, plus "Read More Reviews" link
+4. **CTA** — centered heading + "Request a Quote" button
 
 ## Site Structure
 
@@ -65,6 +77,23 @@ Static HTML/CSS/JS files are served directly by Nginx. No build step — edit an
 ### Dynamic Functionality
 - **Inquiry Form**: Generic (not wedding-focused), with service checkboxes, write-in budget field, open commentary field. Submits via email to info@gathercateringandevents.com. Reference: gather.jjocapps.com
 - **External Links**: The Knot and Wedding Wire icons linking to their profiles
+
+### CSS Architecture
+| File | Purpose |
+|------|---------|
+| `css/reset.css` | CSS reset |
+| `css/variables.css` | Design tokens (colors, fonts, spacing, etc.) |
+| `css/base.css` | Typography, global styles, scroll-reveal animations |
+| `css/layout.css` | Container, header, nav, grid utilities, footer |
+| `css/components.css` | Buttons, cards, forms, testimonial cards |
+| `css/pages.css` | Page-specific styles (hero variants, service detail, about, inquiry) |
+
+### JS Architecture
+| File | Purpose |
+|------|---------|
+| `js/components.js` | Injects shared header/footer HTML, highlights active nav link |
+| `js/nav.js` | Hamburger menu toggle, services dropdown |
+| `js/scroll-reveal.js` | IntersectionObserver-based reveal animations |
 
 ### Future Versions
 - Social media links
