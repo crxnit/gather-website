@@ -20,18 +20,23 @@
   <header id="site-header"></header>
 
   <main>
-    <!-- Hero -->
-    <section class="hero hero--banner">
-      <div class="container">
-        <img
-          class="hero__banner"
-          srcset="images/logos/sm/gather-back.jpg 400w, images/logos/md/gather-back.jpg 800w"
-          sizes="(max-width: 767px) 100vw, 800px"
-          src="images/logos/md/gather-back.jpg"
-          alt="Gather — From Dawn to Dusk — Catering and Event Services"
-          width="800"
-          height="457"
-        >
+    <!-- Hero — full-width background image with overlay -->
+    <section class="hero-full">
+      <img
+        class="hero-full__bg"
+        srcset="images/sm/display-table-closeup.jpg 400w, images/md/display-table-closeup.jpg 800w, images/lg/display-table-closeup.jpg 1400w"
+        sizes="100vw"
+        src="images/lg/display-table-closeup.jpg"
+        alt=""
+        aria-hidden="true"
+      >
+      <div class="hero-full__overlay"></div>
+      <div class="hero-full__content">
+        <img class="hero-full__logo" src="images/logos/sm/Gather.png" alt="Gather logo" width="80" height="80">
+        <p class="hero-full__tagline">From Dawn to Dusk</p>
+        <h1 class="hero-full__heading">Bringing people together with exceptional catering and wholehearted hospitality</h1>
+        <p class="hero-full__desc">Full-service event planning, catering, and bar services for every occasion — corporate events, weddings, celebrations, and more.</p>
+        <a href="inquiry.html" class="btn btn--primary btn--lg">Get a Quote</a>
       </div>
     </section>
 
@@ -60,7 +65,6 @@
             </div>
             <div class="service-card__content">
               <h3 class="service-card__title">Full Planning</h3>
-              <!-- PLACEHOLDER -->
               <p class="service-card__desc">Comprehensive event planning from concept to completion. We handle every detail so you can enjoy your special day stress-free.</p>
               <span class="service-card__link">Learn More</span>
             </div>
@@ -82,7 +86,6 @@
             </div>
             <div class="service-card__content">
               <h3 class="service-card__title">"Day Of" Coordinating</h3>
-              <!-- PLACEHOLDER -->
               <p class="service-card__desc">Already have a plan? We step in on the big day to manage timelines, vendors, and logistics so everything runs smoothly.</p>
               <span class="service-card__link">Learn More</span>
             </div>
@@ -104,7 +107,6 @@
             </div>
             <div class="service-card__content">
               <h3 class="service-card__title">Mobile Bartending</h3>
-              <!-- PLACEHOLDER -->
               <p class="service-card__desc">Professional bartending services brought to your venue. Custom cocktail menus, full bar setups, and experienced bartenders.</p>
               <span class="service-card__link">Learn More</span>
             </div>
@@ -126,7 +128,6 @@
             </div>
             <div class="service-card__content">
               <h3 class="service-card__title">Catering</h3>
-              <!-- PLACEHOLDER -->
               <p class="service-card__desc">Delicious, customized menus for any occasion. From plated dinners to buffet spreads, we create memorable dining experiences.</p>
               <span class="service-card__link">Learn More</span>
             </div>
@@ -148,11 +149,47 @@
             </div>
             <div class="service-card__content">
               <h3 class="service-card__title">Catering Staffing</h3>
-              <!-- PLACEHOLDER -->
               <p class="service-card__desc">Need extra hands? Our trained catering staff provide professional service for events of any size, from servers to kitchen support.</p>
               <span class="service-card__link">Learn More</span>
             </div>
           </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="services-intro reveal reveal--slide-up">
+          <h2>What Our Clients Say</h2>
+          <p class="text-subdued">We're proud to create memorable experiences. Here's what people are saying.</p>
+        </div>
+
+        <div class="grid grid--testimonials">
+          <div class="card testimonial-card reveal reveal--slide-up">
+            <div class="testimonial-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-card__quote">Gather made our corporate holiday party an absolute hit. The food was incredible, the staff was professional, and everything ran like clockwork. We've already booked them for next year!</p>
+            <p class="testimonial-card__author">Sarah M.</p>
+            <p class="testimonial-card__event">Corporate Holiday Party</p>
+          </div>
+
+          <div class="card testimonial-card reveal reveal--slide-up">
+            <div class="testimonial-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-card__quote">We hired Gather for day-of coordination and it was the best decision we made. They handled every detail with such grace and allowed us to truly enjoy our wedding day without any stress.</p>
+            <p class="testimonial-card__author">James & Emily R.</p>
+            <p class="testimonial-card__event">Wedding Reception</p>
+          </div>
+
+          <div class="card testimonial-card reveal reveal--slide-up">
+            <div class="testimonial-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-card__quote">From the very first meeting to the last guest leaving, Gather's full planning service exceeded our expectations. They understood our vision perfectly and brought it to life beautifully.</p>
+            <p class="testimonial-card__author">Amanda & David L.</p>
+            <p class="testimonial-card__event">Anniversary Celebration</p>
+          </div>
+        </div>
+
+        <div class="text-center" style="margin-top: var(--space-xl);">
+          <a href="testimonials.html" class="btn btn--outline">Read More Reviews</a>
         </div>
       </div>
     </section>

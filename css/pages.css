@@ -1,4 +1,4 @@
-/* Hero Section */
+/* Hero Section (legacy — used on subpages) */
 .hero {
   text-align: center;
   padding-block: var(--space-2xl);
@@ -53,73 +53,116 @@
   }
 }
 
-/* Compact hero — used on homepage to keep services in first viewport */
-.hero--compact {
-  padding-block: var(--space-lg) var(--space-md);
+/* ── Full-width hero — Together & Co style ── */
+.hero-full {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-.hero--compact .hero__logo {
-  width: 64px;
-  margin-bottom: var(--space-sm);
-}
-
-.hero--compact .hero__title {
-  font-size: clamp(1.5rem, 6vw, 2.5rem);
-  margin-bottom: 2px;
-}
-
-.hero--compact .hero__tagline {
-  font-size: var(--text-base);
-  margin-bottom: 2px;
-}
-
-.hero--compact .hero__subtitle {
-  font-size: var(--text-sm);
-  margin-bottom: 0;
-}
-
-@media (min-width: 768px) {
-  .hero--compact {
-    padding-block: var(--space-xl) var(--space-md);
-  }
-
-  .hero--compact .hero__logo {
-    width: 80px;
-    margin-bottom: var(--space-sm);
-  }
-
-  .hero--compact .hero__tagline {
-    font-size: var(--text-lg);
-  }
-
-  .hero--compact .hero__subtitle {
-    font-size: var(--text-base);
-  }
-}
-
-/* Banner hero — full brand image replaces separate logo + text */
-.hero--banner {
-  padding-block: var(--space-md) 0;
-}
-
-.hero__banner {
-  display: block;
+.hero-full__bg {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  max-width: 300px;
+  height: 100%;
+  object-fit: cover;
+  max-width: none;
+}
+
+.hero-full__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(44, 62, 80, 0.55) 0%,
+    rgba(44, 62, 80, 0.75) 100%
+  );
+}
+
+.hero-full__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 720px;
+  padding: var(--space-3xl) var(--container-padding);
+}
+
+.hero-full__logo {
+  width: 70px;
   height: auto;
   margin-inline: auto;
-  border-radius: var(--radius-md);
+  margin-bottom: var(--space-md);
+  border-radius: var(--radius-full);
+}
+
+.hero-full__tagline {
+  font-family: var(--font-tagline);
+  font-size: var(--text-lg);
+  color: var(--color-noodles);
+  font-style: italic;
+  margin-bottom: var(--space-md);
+  letter-spacing: 0.04em;
+}
+
+.hero-full__heading {
+  font-family: var(--font-brand);
+  font-size: clamp(1.75rem, 5vw, 3rem);
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: var(--space-lg);
+  letter-spacing: 0.02em;
+}
+
+.hero-full__desc {
+  font-size: var(--text-lg);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-xl);
 }
 
 @media (min-width: 768px) {
-  .hero--banner {
-    padding-block: var(--space-lg) 0;
+  .hero-full {
+    min-height: 80vh;
   }
 
-  .hero__banner {
-    max-width: 400px;
-    border-radius: var(--radius-lg);
+  .hero-full__logo {
+    width: 90px;
+    margin-bottom: var(--space-lg);
   }
+
+  .hero-full__tagline {
+    font-size: var(--text-2xl);
+  }
+
+  .hero-full__desc {
+    font-size: var(--text-xl);
+  }
+}
+
+/* ── Alternating section background ── */
+.section--alt {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+/* ── Testimonials grid ── */
+.grid--testimonials {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .grid--testimonials {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.testimonial-card__stars {
+  color: var(--color-noodles);
+  font-size: var(--text-lg);
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-sm);
 }
 
 /* Homepage services intro */
