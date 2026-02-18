@@ -262,6 +262,73 @@
   }
 }
 
+/* Pricing Card */
+.pricing-card {
+  max-width: 500px;
+  margin-inline: auto;
+  margin-top: var(--space-2xl);
+  padding: var(--space-xl);
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.pricing-card__label {
+  font-family: var(--font-accent);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text);
+  opacity: 0.7;
+  margin-bottom: var(--space-sm);
+}
+
+.pricing-card__price {
+  font-family: var(--font-brand);
+  font-size: var(--text-5xl);
+  color: var(--color-noodles);
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+}
+
+.pricing-card__note {
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  opacity: 0.7;
+  margin-bottom: var(--space-lg);
+}
+
+.pricing-card__title {
+  font-family: var(--font-accent);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-title);
+  margin-bottom: var(--space-md);
+}
+
+.pricing-card__list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: var(--space-lg);
+  text-align: left;
+  display: inline-block;
+}
+
+.pricing-card__list li {
+  padding: var(--space-xs) 0;
+  line-height: var(--line-height-relaxed);
+  font-size: var(--text-sm);
+}
+
+.pricing-card__list li::before {
+  content: '\2713';
+  color: var(--color-noodles);
+  font-weight: var(--font-weight-semibold);
+  margin-right: var(--space-sm);
+}
+
 /* About Page */
 .about-hero {
   display: flex;
