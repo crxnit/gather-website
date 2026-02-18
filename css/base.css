@@ -70,7 +70,7 @@ strong {
 
 /* Tagline */
 .brand-tagline {
-  font-family: var(--font-tagline);
+  font-family: var(--font-accent);
   color: var(--color-text);
   font-style: italic;
 }

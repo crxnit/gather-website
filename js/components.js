@@ -47,7 +47,6 @@
   function getHeaderHTML() {
     return '<div class="header-inner">' +
       '<a href="' + url('index.html') + '" class="header-logo" aria-label="Gather Home">' +
-        '<img src="' + url('images/logos/sm/Gather.png') + '" alt="Gather Logo" width="50" height="50">' +
         '<span class="brand-wordmark">GATHER</span>' +
       '</a>' +
       '<button class="hamburger" aria-label="Toggle menu" aria-expanded="false">' +

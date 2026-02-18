@@ -23,7 +23,8 @@
 .header-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: var(--space-xl);
   height: var(--header-height);
   max-width: var(--container-max);
   margin-inline: auto;
@@ -346,6 +347,7 @@ main {
 
 .footer-external {
   display: flex;
+  justify-content: center;
   gap: var(--space-lg);
   align-items: center;
 }
@@ -392,10 +394,9 @@ main {
 
 @media (min-width: 768px) {
   .footer-inner {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    text-align: left;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
   .footer-brand {
@@ -403,8 +404,8 @@ main {
   }
 
   .footer-links {
-    justify-content: flex-start;
-    gap: var(--space-md) var(--space-xl);
+    justify-content: center;
+    gap: var(--space-sm) var(--space-xl);
   }
 
   .footer-badges {
