@@ -184,7 +184,7 @@
 .form-label {
   display: block;
   font-family: var(--font-accent);
-  font-size: var(--text-sm);
+  font-size: var(--text-lg);
   font-weight: var(--font-weight-medium);
   color: var(--color-title);
   margin-bottom: var(--space-xs);
@@ -229,7 +229,7 @@
 
 /* Checkbox group */
 .checkbox-group {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   gap: var(--space-sm);
 }
@@ -237,16 +237,16 @@
 .checkbox-label {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
-  font-size: var(--text-base);
+  gap: var(--space-md);
+  font-size: var(--text-lg);
   cursor: pointer;
-  padding: var(--space-xs) 0;
+  padding: var(--space-sm) 0;
   min-height: var(--tap-min);
 }
 
 .checkbox-label input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   accent-color: var(--color-rosewood);
   cursor: pointer;
 }

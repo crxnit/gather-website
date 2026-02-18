@@ -401,6 +401,12 @@
   margin-bottom: var(--space-sm);
 }
 
+.inquiry-page__intro {
+  text-align: center;
+  max-width: none;
+  margin-bottom: var(--space-xl);
+}
+
 @media (min-width: 768px) {
   .inquiry-page {
     padding-block: var(--space-2xl);
