@@ -93,10 +93,12 @@
 
 .hero-full__logo {
   width: 150px;
-  height: auto;
+  height: 150px;
   margin-inline: auto;
   margin-bottom: var(--space-sm);
   border-radius: var(--radius-full);
+  object-fit: cover;
+  object-position: 15% 50%;
 }
 
 .hero-full__tagline {
@@ -172,6 +174,7 @@
 .services-intro {
   text-align: center;
   margin-bottom: var(--space-xl);
+  margin-top: calc(-1 * var(--space-2xl));
 }
 
 .services-intro h2 {
