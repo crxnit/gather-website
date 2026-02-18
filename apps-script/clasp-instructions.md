@@ -4,7 +4,7 @@
 
 ## Prerequisites
 
-- **Homebrew** installed ([brew.sh](https://brew.sh))
+- **Node.js** (v12 or later) and **npm** installed
 - Access to the Google account that owns the Apps Script project (the `@gathercateringandevents.com` Google Workspace account)
 
 ## One-Time Setup
@@ -12,7 +12,7 @@
 ### 1. Install clasp
 
 ```bash
-brew install clasp
+npm install -g @google/clasp
 ```
 
 ### 2. Create a Google Cloud Project (if you don't have one)
@@ -52,7 +52,21 @@ Also enable the Apps Script API toggle in the script editor:
    - **Editor** (`roles/editor`)
 6. Click **"Continue"**, then **"Done"**
 
-### 5. Create a Service Account Key
+### 5. Allow Service Account Key Creation (Organization Policy)
+
+By default, Google Workspace organizations enforce a policy that blocks service account key creation (`iam.disableServiceAccountKeyCreation`). You need to disable this constraint before creating a key.
+
+1. In the Cloud Console, go to **IAM & Admin > Organization Policies** (or visit https://console.cloud.google.com/iam-admin/orgpolicies)
+2. Search for **"Disable service account key creation"** (`iam.disableServiceAccountKeyCreation`)
+3. Click on the constraint to open it
+4. Click **"Manage Policy"** (or **"Edit"** at the top)
+5. Under **"Applies to"**, select **"Customize"**
+6. Under **"Policy enforcement"**, select **"Off"** (or add a rule that does not enforce the constraint)
+7. Click **"Save"**
+
+> **Note:** If you only want to allow key creation for this specific project rather than the entire organization, click **"Add Rule"**, set **"Policy values"** to **"Allow"**, and scope it to the Gather Website project. Changes may take a few minutes to propagate.
+
+### 6. Create a Service Account Key
 
 1. On the Service Accounts page, click the `clasp-deploy` account you just created
 2. Go to the **"Keys"** tab
@@ -62,7 +76,7 @@ Also enable the Apps Script API toggle in the script editor:
 
 > **Security:** This key grants access to your GCP project. Never commit it to version control.
 
-### 6. Link the GCP Project to the Apps Script Project
+### 7. Link the GCP Project to the Apps Script Project
 
 1. Open the Apps Script project at [script.google.com](https://script.google.com/)
 2. Click the **gear icon** (Project Settings) in the left sidebar
@@ -70,7 +84,7 @@ Also enable the Apps Script API toggle in the script editor:
 4. Enter your GCP **Project Number** (found on the Cloud Console dashboard — it's numeric, not the Project ID)
 5. Click **"Set project"**
 
-### 7. Share the Apps Script Project with the Service Account
+### 8. Share the Apps Script Project with the Service Account
 
 The service account needs access to the script:
 
@@ -83,7 +97,7 @@ Also share the Google Sheet with the service account:
 1. Open the Google Sheet used for inquiry logging
 2. Click **"Share"** and add the same service account email as an **Editor**
 
-### 8. Log in to clasp with the Service Account
+### 9. Log in to clasp with the Service Account
 
 ```bash
 cd apps-script
@@ -98,13 +112,13 @@ To verify it worked:
 clasp login --status
 ```
 
-### 9. Find the Script ID
+### 10. Find the Script ID
 
 1. Open the existing Apps Script project at [script.google.com](https://script.google.com/)
 2. Click the **gear icon** (Project Settings) in the left sidebar
 3. Copy the **Script ID** (a long alphanumeric string)
 
-### 10. Create the `.clasp.json` file
+### 11. Create the `.clasp.json` file
 
 In the `apps-script/` directory, create a file named `.clasp.json`:
 
@@ -115,9 +129,9 @@ In the `apps-script/` directory, create a file named `.clasp.json`:
 }
 ```
 
-Replace `YOUR_SCRIPT_ID_HERE` with the Script ID from Step 9.
+Replace `YOUR_SCRIPT_ID_HERE` with the Script ID from Step 10.
 
-### 11. Create the `appsscript.json` manifest
+### 12. Create the `appsscript.json` manifest
 
 In the `apps-script/` directory, create a file named `appsscript.json`:
 
@@ -134,7 +148,7 @@ In the `apps-script/` directory, create a file named `appsscript.json`:
 }
 ```
 
-### 12. Update `.gitignore`
+### 13. Update `.gitignore`
 
 Add these entries to the project's `.gitignore`:
 
@@ -264,6 +278,9 @@ apps-script/
 > **Note:** clasp ignores non-`.gs` / non-`.json` files by default, so the `.md` files in this directory will not be pushed to Apps Script.
 
 ## Troubleshooting
+
+### "Organization Policy blocks service account key creation"
+Your Google Workspace organization enforces the `iam.disableServiceAccountKeyCreation` constraint. Follow **Step 5** above to disable it for your project. You need Organization Admin or Organization Policy Administrator permissions to change this. Changes may take a few minutes to propagate.
 
 ### "Script API not enabled" error
 Go to https://script.google.com/home/usersettings and make sure the API toggle is **On**.
