@@ -69,6 +69,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: left center;
   max-width: none;
 }
 
@@ -198,10 +199,13 @@
 .service-detail__title {
   font-size: var(--text-3xl);
   margin-bottom: var(--space-md);
+  text-align: center;
 }
 
 .service-detail__content {
   max-width: var(--container-narrow);
+  margin-inline: auto;
+  text-align: center;
 }
 
 .service-detail__content p {
@@ -233,6 +237,8 @@
 
 .service-detail__content ul {
   list-style: disc;
+  display: inline-block;
+  text-align: left;
   padding-left: var(--space-xl);
   margin-bottom: var(--space-lg);
 }
@@ -246,6 +252,7 @@
   margin-top: var(--space-xl);
   padding-top: var(--space-lg);
   border-top: 1px solid var(--color-border);
+  text-align: center;
 }
 
 @media (min-width: 768px) {

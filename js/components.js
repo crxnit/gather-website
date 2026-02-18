@@ -86,9 +86,7 @@
         '<a href="https://www.weddingwire.com/biz/gather-from-dawn-to-dusk/4e3cac205c612625.html" target="_blank" rel="noopener noreferrer">Wedding Wire</a>' +
       '</div>' +
       '<div class="footer-badges" id="footer-badges">' +
-        '<a target="_blank" rel="noopener noreferrer" href="https://www.theknot.com/marketplace/redirect-2101040?utm_source=vendor_website&utm_medium=banner&utm_term=87bd69e8-b22e-41de-bda9-54f66256cf42&utm_campaign=vendor_badge_assets"><img alt="As Seen on The Knot" src="https://d13ns7kbjmbjip.cloudfront.net/For_Your_Website/TK-badge_AsSeen.png" width="190"></a>' +
         '<a target="_blank" rel="noopener noreferrer" href="https://www.theknot.com/marketplace/redirect-2101040?utm_source=vendor_website&utm_medium=banner&utm_term=87bd69e8-b22e-41de-bda9-54f66256cf42&utm_campaign=vendor_badge_assets"><img alt="Review us on The Knot" src="https://d13ns7kbjmbjip.cloudfront.net/For_Your_Website/TK-badge_ReviewUs.png" width="190"></a>' +
-        '<a target="_blank" rel="noopener noreferrer" href="https://www.theknot.com/marketplace/redirect-2101040?utm_source=vendor_website&utm_medium=banner&utm_term=87bd69e8-b22e-41de-bda9-54f66256cf42&utm_campaign=vendor_badge_assets"><img alt="Couples love us! See our reviews on The Knot." src="https://d13ns7kbjmbjip.cloudfront.net/For_Your_Website/TK-badge_ReadReviews.png" width="190"></a>' +
         '<a target="_blank" rel="noopener noreferrer" href="https://www.weddingwire.com" title="Find us on WeddingWire"><img alt="Find us on WeddingWire" src="https://www.weddingwire.com/images/sellos/partner--pp2223242.png" srcset="https://www.weddingwire.com/images/sellos/partner--pp2223242.png 1x, https://www.weddingwire.com/images/sellos/partner--pp2223242.png?largeImg=true 2x"></a>' +
       '</div>' +
       '<div class="footer-contact">' +

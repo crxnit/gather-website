@@ -36,10 +36,9 @@ Website for **Gather Catering and Events** — a catering and event services bus
 ### Fonts
 | Font | Usage |
 |------|-------|
-| Abril Fatface | "GATHER" brand wordmark |
-| Lucida Calligraphy | "From Dawn to Dusk" tagline |
-| Source Sans Pro | Main website font, "Catering and Event Services" |
-| Poppins | Business card info |
+| Abril Fatface | "GATHER" brand wordmark, hero heading |
+| Poppins | Tagline ("From Dawn to Dusk"), navigation, buttons, business card info |
+| Source Sans Pro | Main website body font |
 
 ### Color Palette
 | Color | Hex | Usage |
@@ -94,6 +93,14 @@ Inspired by [togetherandco.com](https://togetherandco.com). Sections in order:
 | `js/components.js` | Injects shared header/footer HTML, highlights active nav link |
 | `js/nav.js` | Hamburger menu toggle, services dropdown |
 | `js/scroll-reveal.js` | IntersectionObserver-based reveal animations |
+
+### Layout Notes
+- **Header**: GATHER wordmark only (no logo image), centered with nav links
+- **Hero section**: Compact full-width hero with background image (left-focused), logo, heading, and description. No CTA button.
+- **Service cards**: Centered flexbox grid — incomplete last row is centered
+- **Service detail pages**: All headings and body text centered; bullet lists centered as a block
+- **Footer**: Fully centered layout with two vendor badges (The Knot, WeddingWire)
+- **Caching**: All HTML pages include no-cache meta tags for development
 
 ### Future Versions
 - Social media links
