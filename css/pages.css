@@ -174,7 +174,29 @@
 }
 
 .services-intro h2 {
-  margin-bottom: var(--space-sm);
+  font-size: var(--text-4xl);
+  margin-bottom: 0;
+  display: inline-block;
+  padding-inline: var(--space-xl);
+}
+
+.services-intro::before,
+.services-intro::after {
+  content: '';
+  display: block;
+  width: 140px;
+  height: 1px;
+  background-color: var(--color-noodles);
+  margin-inline: auto;
+  opacity: 0.5;
+}
+
+.services-intro::before {
+  margin-bottom: var(--space-lg);
+}
+
+.services-intro::after {
+  margin-top: var(--space-lg);
 }
 
 @media (min-width: 768px) {
