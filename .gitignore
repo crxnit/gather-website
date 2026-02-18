@@ -4,3 +4,6 @@ archive/
 # Deployment-specific config (contains API keys / IDs)
 js/config.js
 apps-script/config.gs
+
+apps-script/.clasp.json
+apps-script/service-account-key.json
