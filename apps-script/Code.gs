@@ -129,52 +129,59 @@ function logToSheet(data) {
 
 function sendConfirmationEmail(data) {
   var safeName = escapeHtml(data.firstName);
+  var services = formatServices(data.services, 'Not specified');
 
-  var subject = 'Thank you for your inquiry — Gather Catering and Events';
+  var subject = 'Thank you for your inquiry \u2014 Gather Catering and Events';
 
   var body = [
     'Hi ' + data.firstName + ',',
     '',
-    'Thank you for reaching out to Gather Catering and Events! We have received your inquiry and appreciate you taking the time to share your event details with us.',
+    'Thank you for reaching out to Gather Catering and Events! We\u2019re so glad you got in touch.',
     '',
-    'What happens next:',
-    '- Your inquiry has been forwarded to ' + CATERING_MANAGER_NAME + '.',
-    '- You can expect to hear back from us within 24-48 business hours.',
-    '- If your event is time-sensitive, feel free to call or email us directly.',
+    'We\u2019ve received your inquiry and one of our team members will be in touch within 24\u201348 business hours to discuss how we can help bring your vision to life.',
     '',
-    'In the meantime, if you have any questions or additional details to share, don\'t hesitate to reach out:',
+    'Your Details:',
+    'Services: ' + services,
+    'Budget: ' + (data.budget || 'Not provided'),
     '',
-    'Email: info@gathercateringandevents.com',
-    'Website: https://gathercateringandevents.com',
-    '',
-    'We look forward to helping make your event unforgettable!',
+    'In the meantime, feel free to reply to this email if you have any questions.',
     '',
     'Warm regards,',
-    'The Gather Team',
+    'The Gather Catering and Events Team',
     'From Dawn to Dusk'
   ].join('\n');
 
-  var htmlBody = [
-    '<div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">',
-      '<h2 style="color: #2C3E50;">Thank you, ' + safeName + '!</h2>',
-      '<p>We have received your inquiry and appreciate you taking the time to share your event details with us.</p>',
-      '<h3 style="color: #2C3E50; margin-top: 24px;">What happens next</h3>',
-      '<ul style="line-height: 1.8;">',
-        '<li>Your inquiry has been forwarded to ' + escapeHtml(CATERING_MANAGER_NAME) + '.</li>',
-        '<li>You can expect to hear back from us within <strong>24\u201348 business hours</strong>.</li>',
-        '<li>If your event is time-sensitive, feel free to call or email us directly.</li>',
-      '</ul>',
-      '<p style="margin-top: 24px;">In the meantime, if you have any questions or additional details to share, don\u2019t hesitate to reach out:</p>',
-      '<p>',
-        '<strong>Email:</strong> <a href="mailto:info@gathercateringandevents.com" style="color: #7F515F;">info@gathercateringandevents.com</a><br>',
-        '<strong>Website:</strong> <a href="https://gathercateringandevents.com" style="color: #7F515F;">gathercateringandevents.com</a>',
-      '</p>',
-      '<p>We look forward to helping make your event unforgettable!</p>',
-      '<p style="margin-top: 24px;">Warm regards,<br><strong>The Gather Team</strong><br><em>From Dawn to Dusk</em></p>',
-      '<hr style="border: none; border-top: 1px solid #ddd; margin-top: 32px;">',
-      '<p style="color: #999; font-size: 12px;">You received this email because you submitted an inquiry at gathercateringandevents.com.</p>',
-    '</div>'
-  ].join('');
+  // Build the "Your Details" lines for the highlighted box
+  var detailLines = '<strong>Your Details:</strong><br>' +
+    'Services Interested In: ' + escapeHtml(services);
+  if (data.budget) {
+    detailLines += '<br>Budget: ' + escapeHtml(data.budget);
+  }
+
+  var htmlBody =
+    '<div style="font-family:\'Helvetica Neue\',Arial,sans-serif;max-width:600px;margin:0 auto;color:#2c3e50">' +
+      '<div style="background-color:#2c3e50;padding:30px;text-align:center">' +
+        '<h1 style="color:#f9e3b4;margin:0;font-size:28px">Thank You, ' + safeName + '!</h1>' +
+      '</div>' +
+      '<div style="padding:30px;background-color:#f4f1ea">' +
+        '<p style="font-size:16px;line-height:1.6;color:#2c3e50">' +
+          'We\u2019re so glad you reached out! We\u2019ve received your inquiry and are excited to learn more about your upcoming event.' +
+        '</p>' +
+        '<p style="font-size:16px;line-height:1.6;color:#2c3e50">' +
+          'One of our team members will be in touch within <strong>24\u201348 business hours</strong> to discuss how we can help bring your vision to life. In the meantime, feel free to reply to this email if you have any questions.' +
+        '</p>' +
+        '<div style="background-color:rgba(249,227,180,0.3);border-left:4px solid #f9e3b4;padding:15px;margin:25px 0">' +
+          '<p style="margin:0;font-size:16px;color:#2c3e50">' + detailLines + '</p>' +
+        '</div>' +
+        '<p style="font-size:16px;line-height:1.6;color:#2c3e50;margin-bottom:0">' +
+          'Warm regards,<br>' +
+          '<strong>The Gather Catering and Events Team</strong>' +
+        '</p>' +
+      '</div>' +
+      '<div style="background-color:#2c3e50;padding:20px;text-align:center">' +
+        '<p style="color:#f9e3b4;margin:0;font-size:14px">Gather Catering and Events &mdash; From Dawn to Dusk</p>' +
+      '</div>' +
+    '</div>';
 
   GmailApp.sendEmail(data.email, subject, body, {
     htmlBody: htmlBody,
