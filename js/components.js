@@ -23,7 +23,8 @@
     { label: 'Day-Of Coordinating', href: 'services/day-of-coordinating.html' },
     { label: 'Mobile Bartending', href: 'services/mobile-bartending.html' },
     { label: 'Catering', href: 'services/catering.html' },
-    { label: 'Catering Staffing', href: 'services/catering-staffing.html' }
+    { label: 'Catering Staffing', href: 'services/catering-staffing.html' },
+    { label: 'Mobile Food Cart', href: 'services/mobile-food-cart.html' }
   ];
 
   const PAGE_LINKS = [
