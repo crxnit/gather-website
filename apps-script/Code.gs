@@ -186,6 +186,7 @@ function sendConfirmationEmail(data) {
   GmailApp.sendEmail(data.email, subject, body, {
     htmlBody: htmlBody,
     name: SENDER_NAME,
+    from: 'inquiry@gathercafeandevents.com',
     replyTo: 'catering@gathercateringandevents.com'
   });
 }
