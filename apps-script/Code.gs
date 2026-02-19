@@ -63,26 +63,46 @@ function fieldOrDefault(value, fallback, shouldEscape) {
 // ── Main handler ───────────────────────────────────────────────────────────────
 
 function doPost(e) {
+  Logger.log('doPost: request received');
   try {
+    Logger.log('doPost: parsing request body');
     var data = JSON.parse(e.postData.contents);
+    Logger.log('doPost: parsed data for ' + data.firstName + ' ' + data.lastName + ' <' + data.email + '>');
 
     // Server-side validation of required fields
     if (!data.firstName || !data.lastName || !data.email) {
+      Logger.log('doPost: validation failed — missing required fields');
       return ContentService
         .createTextOutput(JSON.stringify({ status: 'error', message: 'Missing required fields' }))
         .setMimeType(ContentService.MimeType.JSON);
     }
 
+    Logger.log('doPost: validation passed, logging to sheet');
     logToSheet(data);
-    sendConfirmationEmail(data);
-    sendNotificationEmail(data);
 
+    Logger.log('doPost: sending confirmation email to ' + data.email);
+    try {
+      sendConfirmationEmail(data);
+      Logger.log('doPost: confirmation email sent successfully');
+    } catch (emailErr) {
+      Logger.log('doPost: confirmation email failed — ' + emailErr.toString());
+    }
+
+    Logger.log('doPost: sending notification email to ' + NOTIFICATION_EMAIL);
+    try {
+      sendNotificationEmail(data);
+      Logger.log('doPost: notification email sent successfully');
+    } catch (notifyErr) {
+      Logger.log('doPost: notification email failed — ' + notifyErr.toString());
+    }
+
+    Logger.log('doPost: completed successfully');
     return ContentService
       .createTextOutput(JSON.stringify({ status: 'success' }))
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (err) {
-    Logger.log('doPost error: ' + err.toString());
+    Logger.log('doPost: unhandled error — ' + err.toString());
     return ContentService
       .createTextOutput(JSON.stringify({ status: 'error', message: 'Internal error' }))
       .setMimeType(ContentService.MimeType.JSON);
@@ -94,14 +114,16 @@ function doPost(e) {
 function logToSheet(data) {
   try {
     if (SPREADSHEET_ID === 'YOUR_SPREADSHEET_ID_HERE') {
-      Logger.log('Sheet logging skipped: SPREADSHEET_ID not configured.');
+      Logger.log('logToSheet: skipped — SPREADSHEET_ID not configured');
       return;
     }
 
+    Logger.log('logToSheet: opening spreadsheet ' + SPREADSHEET_ID);
     var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
     var sheet = ss.getSheetByName(SHEET_NAME);
 
     if (!sheet) {
+      Logger.log('logToSheet: sheet "' + SHEET_NAME + '" not found, creating it');
       sheet = ss.insertSheet(SHEET_NAME);
       sheet.appendRow([
         'Timestamp', 'First Name', 'Last Name', 'Email',
@@ -119,9 +141,10 @@ function logToSheet(data) {
       data.budget || '',
       data.details || ''
     ]);
+    Logger.log('logToSheet: row appended successfully');
   } catch (e) {
     // Sheet logging is optional — don't break email delivery
-    Logger.log('Sheet logging failed: ' + e.toString());
+    Logger.log('logToSheet: failed — ' + e.toString());
   }
 }
 
@@ -183,12 +206,14 @@ function sendConfirmationEmail(data) {
       '</div>' +
     '</div>';
 
+  Logger.log('sendConfirmationEmail: sending to ' + data.email + ' from inquiry@gathercafeandevents.com');
   GmailApp.sendEmail(data.email, subject, body, {
     htmlBody: htmlBody,
     name: SENDER_NAME,
     from: 'inquiry@gathercafeandevents.com',
     replyTo: 'catering@gathercateringandevents.com'
   });
+  Logger.log('sendConfirmationEmail: GmailApp.sendEmail returned without error');
 }
 
 // ── 3. Notification email to the catering team ─────────────────────────────────
@@ -231,9 +256,11 @@ function sendNotificationEmail(data) {
     '<p style="color:#999; font-size:12px;">Submitted: ' + escapeHtml(data.timestamp || '') + '</p>'
   ].join('');
 
+  Logger.log('sendNotificationEmail: sending to ' + NOTIFICATION_EMAIL);
   GmailApp.sendEmail(NOTIFICATION_EMAIL, subject, body, {
     htmlBody: htmlBody,
     replyTo: data.email,
     name: 'Gather Website'
   });
+  Logger.log('sendNotificationEmail: GmailApp.sendEmail returned without error');
 }
