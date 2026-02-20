@@ -15,17 +15,16 @@ Website for **Gather Catering and Events** — a catering and event services bus
 | Layer | Technology |
 |-------|------------|
 | Frontend | Plain HTML/CSS/JS — no framework, no build step |
-| Email/Forms | Google Apps Script → Google Workspace (catering@gathercateringandevents.com) |
-| Hosting | Self-hosted Linux containers: Traefik (SSL + reverse proxy) → Nginx (static files) |
-| Backend | None initially; FastAPI container available if future features need it |
+| Email/Forms | FastAPI (`api/main.py`) → SMTP relay (`smtp-relay.gmail.com:25`, IP-authenticated) |
+| Hosting | Self-hosted Linux containers: Traefik (SSL + reverse proxy) → Nginx (static files) + FastAPI |
+| Backend | FastAPI — `api/main.py` (uvicorn); run with `uvicorn main:app` from the `api/` directory |
 
 ### Form Submission Flow
 1. User fills out inquiry form on the website
-2. Client-side JS POSTs form data to a deployed Google Apps Script web app URL
-3. Apps Script sends two emails:
-   - **Confirmation** to the submitter — from `inquiry@gathercafeandevents.com`, reply-to `catering@gathercateringandevents.com`
+2. Client-side JS POSTs JSON to `https://gathercateringandevents.com/api/submit`
+3. FastAPI sends two emails via SMTP relay (from `web-inquiry@gathercateringandevents.com`):
+   - **Confirmation** to the submitter — reply-to `catering@gathercateringandevents.com`
    - **Notification** to `catering@gathercateringandevents.com` with full lead details
-4. Optionally logs submissions to a Google Sheet
 
 ### Deployment
 - Static HTML/CSS/JS files are served directly by Nginx. No build step — edit and deploy.

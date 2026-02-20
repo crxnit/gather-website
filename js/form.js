@@ -1,24 +1,14 @@
 /**
- * Inquiry form validation and submission to Google Apps Script.
- *
- * NOTE ON no-cors MODE:
- * Google Apps Script web apps redirect (302) to a different origin during execution,
- * which makes standard CORS responses unreliable. Using `mode: 'no-cors'` works around
- * this, but means we cannot read the response — so we optimistically show a success
- * message after the request completes without a network error. If Apps Script returns
- * a server error (500, quota exceeded, etc.), the user will still see the success message.
- * This is a known trade-off of the GAS web app pattern.
+ * Inquiry form validation and submission to the Gather API.
  */
 
 (function () {
   'use strict';
 
-  // Read the Apps Script URL from config.js (loaded before this script).
-  const APPS_SCRIPT_URL = (typeof GATHER_CONFIG !== 'undefined' && GATHER_CONFIG.APPS_SCRIPT_URL) || '';
+  const API_URL = (typeof GATHER_CONFIG !== 'undefined' && GATHER_CONFIG.API_URL) || '';
 
-  /** Guard: prevent submission if the Apps Script URL hasn't been configured. */
   function isConfigured() {
-    return APPS_SCRIPT_URL.startsWith('https://');
+    return API_URL.startsWith('https://');
   }
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -48,13 +38,13 @@
 
       const data = collectFormData();
 
-      fetch(APPS_SCRIPT_URL, {
+      fetch(API_URL, {
         method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       })
-        .then(function () {
+        .then(function (res) {
+          if (!res.ok) throw new Error('Server error: ' + res.status);
           showMessage('success', 'Thank you! Your inquiry has been sent and a confirmation email is on its way. Our team will follow up within 24\u201348 business hours.');
           form.reset();
         })
