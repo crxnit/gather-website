@@ -233,14 +233,13 @@ function sendConfirmationEmail(data) {
       '</div>' +
     '</div>';
 
-  logEvent('INFO', 'sendConfirmationEmail', 'sending to ' + data.email + ' from inquiry@gathercafeandevents.com');
-  GmailApp.sendEmail(data.email, subject, body, {
+  logEvent('INFO', 'sendConfirmationEmail', 'sending to ' + data.email);
+  MailApp.sendEmail(data.email, subject, body, {
     htmlBody: htmlBody,
     name: SENDER_NAME,
-    from: 'inquiry@gathercafeandevents.com',
     replyTo: 'catering@gathercateringandevents.com'
   });
-  logEvent('INFO', 'sendConfirmationEmail', 'GmailApp.sendEmail returned without error');
+  logEvent('INFO', 'sendConfirmationEmail', 'MailApp.sendEmail returned without error');
 }
 
 // ── 3. Notification email to the catering team ─────────────────────────────────
@@ -284,10 +283,10 @@ function sendNotificationEmail(data) {
   ].join('');
 
   logEvent('INFO', 'sendNotificationEmail', 'sending to ' + NOTIFICATION_EMAIL);
-  GmailApp.sendEmail(NOTIFICATION_EMAIL, subject, body, {
+  MailApp.sendEmail(NOTIFICATION_EMAIL, subject, body, {
     htmlBody: htmlBody,
     replyTo: data.email,
     name: 'Gather Website'
   });
-  logEvent('INFO', 'sendNotificationEmail', 'GmailApp.sendEmail returned without error');
+  logEvent('INFO', 'sendNotificationEmail', 'MailApp.sendEmail returned without error');
 }
