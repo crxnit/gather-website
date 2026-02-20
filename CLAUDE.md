@@ -15,9 +15,9 @@ Website for **Gather Catering and Events** — a catering and event services bus
 | Layer | Technology |
 |-------|------------|
 | Frontend | Plain HTML/CSS/JS — no framework, no build step |
-| Email/Forms | FastAPI (`api/main.py`) → SMTP relay (`smtp-relay.gmail.com:25`, IP-authenticated) |
-| Hosting | Self-hosted Linux containers: Traefik (SSL + reverse proxy) → Nginx (static files) + FastAPI |
-| Backend | FastAPI — `api/main.py` (uvicorn); run with `uvicorn main:app` from the `api/` directory |
+| Email/Forms | Go (`api/main.go`) → SMTP relay (`smtp-relay.gmail.com:25`, IP-authenticated) |
+| Hosting | Self-hosted Linux containers: Traefik (SSL + reverse proxy) → Nginx (static) + Go API |
+| Backend | Go — `api/main.go`; build with `go build -o gather-api .`, run `./gather-api` (listens on :8000) |
 
 ### Form Submission Flow
 1. User fills out inquiry form on the website
