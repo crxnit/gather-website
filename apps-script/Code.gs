@@ -209,6 +209,9 @@ function sendConfirmationEmail(data) {
   }
 
   var htmlBody =
+    '<!DOCTYPE html><html><head><meta charset="utf-8">' +
+    '<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">' +
+    '</head><body style="margin:0;padding:0;background-color:#f4f1ea">' +
     '<div style="font-family:\'Helvetica Neue\',Arial,sans-serif;max-width:600px;margin:0 auto;color:#2c3e50">' +
       '<div style="background-color:#2c3e50;padding:30px;text-align:center">' +
         '<h1 style="color:#f9e3b4;margin:0;font-size:28px">Thank You, ' + safeName + '!</h1>' +
@@ -229,9 +232,10 @@ function sendConfirmationEmail(data) {
         '</p>' +
       '</div>' +
       '<div style="background-color:#2c3e50;padding:20px;text-align:center">' +
-        '<p style="color:#f9e3b4;margin:0;font-size:14px">Gather Catering and Events &mdash; From Dawn to Dusk</p>' +
+        '<p style="font-family:\'Abril Fatface\',serif;color:#f9e3b4;margin:0;font-size:36px;letter-spacing:0.05em">GATHER</p>' +
       '</div>' +
-    '</div>';
+    '</div>' +
+    '</body></html>';
 
   logEvent('INFO', 'sendConfirmationEmail', 'sending to ' + data.email);
   MailApp.sendEmail(data.email, subject, body, {
