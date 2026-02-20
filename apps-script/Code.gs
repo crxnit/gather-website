@@ -31,6 +31,33 @@ var SHEET_NAME = 'Inquiry Submissions';
 // PLACEHOLDER: Replace with the catering manager's actual name
 var CATERING_MANAGER_NAME = 'Liz French';
 
+// ── Spreadsheet logging ──────────────────────────────────────────────────────
+
+var LOG_SHEET_NAME = 'Error Logs';
+
+/**
+ * Log an event to the "Error Logs" sheet and Cloud Logging.
+ * @param {string} level  - "INFO" or "ERROR"
+ * @param {string} source - Function name (e.g. "doPost", "logToSheet")
+ * @param {string} message - Description of the event
+ */
+function logEvent(level, source, message) {
+  console.log(source + ': ' + message);
+  try {
+    if (SPREADSHEET_ID === 'YOUR_SPREADSHEET_ID_HERE') return;
+    var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    var sheet = ss.getSheetByName(LOG_SHEET_NAME);
+    if (!sheet) {
+      sheet = ss.insertSheet(LOG_SHEET_NAME);
+      sheet.appendRow(['Timestamp', 'Level', 'Source', 'Message']);
+    }
+    sheet.appendRow([new Date().toISOString(), level, source, message]);
+  } catch (e) {
+    // Fall back to Cloud Logging only — don't break the caller
+    console.log('logEvent: failed to write to sheet — ' + e.toString());
+  }
+}
+
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
 /**
@@ -63,46 +90,46 @@ function fieldOrDefault(value, fallback, shouldEscape) {
 // ── Main handler ───────────────────────────────────────────────────────────────
 
 function doPost(e) {
-  console.log('doPost: request received');
+  logEvent('INFO', 'doPost', 'request received');
   try {
-    console.log('doPost: parsing request body');
+    logEvent('INFO', 'doPost', 'parsing request body');
     var data = JSON.parse(e.postData.contents);
-    console.log('doPost: parsed data for ' + data.firstName + ' ' + data.lastName + ' <' + data.email + '>');
+    logEvent('INFO', 'doPost', 'parsed data for ' + data.firstName + ' ' + data.lastName + ' <' + data.email + '>');
 
     // Server-side validation of required fields
     if (!data.firstName || !data.lastName || !data.email) {
-      console.log('doPost: validation failed — missing required fields');
+      logEvent('ERROR', 'doPost', 'validation failed — missing required fields');
       return ContentService
         .createTextOutput(JSON.stringify({ status: 'error', message: 'Missing required fields' }))
         .setMimeType(ContentService.MimeType.JSON);
     }
 
-    console.log('doPost: validation passed, logging to sheet');
+    logEvent('INFO', 'doPost', 'validation passed, logging to sheet');
     logToSheet(data);
 
-    console.log('doPost: sending confirmation email to ' + data.email);
+    logEvent('INFO', 'doPost', 'sending confirmation email to ' + data.email);
     try {
       sendConfirmationEmail(data);
-      console.log('doPost: confirmation email sent successfully');
+      logEvent('INFO', 'doPost', 'confirmation email sent successfully');
     } catch (emailErr) {
-      console.log('doPost: confirmation email failed — ' + emailErr.toString());
+      logEvent('ERROR', 'doPost', 'confirmation email failed — ' + emailErr.toString());
     }
 
-    console.log('doPost: sending notification email to ' + NOTIFICATION_EMAIL);
+    logEvent('INFO', 'doPost', 'sending notification email to ' + NOTIFICATION_EMAIL);
     try {
       sendNotificationEmail(data);
-      console.log('doPost: notification email sent successfully');
+      logEvent('INFO', 'doPost', 'notification email sent successfully');
     } catch (notifyErr) {
-      console.log('doPost: notification email failed — ' + notifyErr.toString());
+      logEvent('ERROR', 'doPost', 'notification email failed — ' + notifyErr.toString());
     }
 
-    console.log('doPost: completed successfully');
+    logEvent('INFO', 'doPost', 'completed successfully');
     return ContentService
       .createTextOutput(JSON.stringify({ status: 'success' }))
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (err) {
-    console.log('doPost: unhandled error — ' + err.toString());
+    logEvent('ERROR', 'doPost', 'unhandled error — ' + err.toString());
     return ContentService
       .createTextOutput(JSON.stringify({ status: 'error', message: 'Internal error' }))
       .setMimeType(ContentService.MimeType.JSON);
@@ -114,16 +141,16 @@ function doPost(e) {
 function logToSheet(data) {
   try {
     if (SPREADSHEET_ID === 'YOUR_SPREADSHEET_ID_HERE') {
-      console.log('logToSheet: skipped — SPREADSHEET_ID not configured');
+      logEvent('INFO', 'logToSheet', 'skipped — SPREADSHEET_ID not configured');
       return;
     }
 
-    console.log('logToSheet: opening spreadsheet ' + SPREADSHEET_ID);
+    logEvent('INFO', 'logToSheet', 'opening spreadsheet ' + SPREADSHEET_ID);
     var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
     var sheet = ss.getSheetByName(SHEET_NAME);
 
     if (!sheet) {
-      console.log('logToSheet: sheet "' + SHEET_NAME + '" not found, creating it');
+      logEvent('INFO', 'logToSheet', 'sheet "' + SHEET_NAME + '" not found, creating it');
       sheet = ss.insertSheet(SHEET_NAME);
       sheet.appendRow([
         'Timestamp', 'First Name', 'Last Name', 'Email',
@@ -141,10 +168,10 @@ function logToSheet(data) {
       data.budget || '',
       data.details || ''
     ]);
-    console.log('logToSheet: row appended successfully');
+    logEvent('INFO', 'logToSheet', 'row appended successfully');
   } catch (e) {
     // Sheet logging is optional — don't break email delivery
-    console.log('logToSheet: failed — ' + e.toString());
+    logEvent('ERROR', 'logToSheet', 'failed — ' + e.toString());
   }
 }
 
@@ -206,14 +233,14 @@ function sendConfirmationEmail(data) {
       '</div>' +
     '</div>';
 
-  console.log('sendConfirmationEmail: sending to ' + data.email + ' from inquiry@gathercafeandevents.com');
+  logEvent('INFO', 'sendConfirmationEmail', 'sending to ' + data.email + ' from inquiry@gathercafeandevents.com');
   GmailApp.sendEmail(data.email, subject, body, {
     htmlBody: htmlBody,
     name: SENDER_NAME,
     from: 'inquiry@gathercafeandevents.com',
     replyTo: 'catering@gathercateringandevents.com'
   });
-  console.log('sendConfirmationEmail: GmailApp.sendEmail returned without error');
+  logEvent('INFO', 'sendConfirmationEmail', 'GmailApp.sendEmail returned without error');
 }
 
 // ── 3. Notification email to the catering team ─────────────────────────────────
@@ -256,11 +283,11 @@ function sendNotificationEmail(data) {
     '<p style="color:#999; font-size:12px;">Submitted: ' + escapeHtml(data.timestamp || '') + '</p>'
   ].join('');
 
-  console.log('sendNotificationEmail: sending to ' + NOTIFICATION_EMAIL);
+  logEvent('INFO', 'sendNotificationEmail', 'sending to ' + NOTIFICATION_EMAIL);
   GmailApp.sendEmail(NOTIFICATION_EMAIL, subject, body, {
     htmlBody: htmlBody,
     replyTo: data.email,
     name: 'Gather Website'
   });
-  console.log('sendNotificationEmail: GmailApp.sendEmail returned without error');
+  logEvent('INFO', 'sendNotificationEmail', 'GmailApp.sendEmail returned without error');
 }
