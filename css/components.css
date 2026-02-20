@@ -78,6 +78,25 @@
 .service-card__image {
   aspect-ratio: 16 / 10;
   overflow: hidden;
+  position: relative;
+}
+
+.service-card__coming-soon {
+  position: absolute;
+  inset: 0;
+  background: rgba(44, 62, 80, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.service-card__coming-soon span {
+  font-family: var(--font-brand);
+  font-size: var(--text-4xl);
+  color: var(--color-noodles);
+  letter-spacing: 0.08em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .service-card__image img {

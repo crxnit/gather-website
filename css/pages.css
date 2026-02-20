@@ -220,6 +220,12 @@
   overflow: hidden;
   border-radius: var(--radius-md);
   margin-bottom: var(--space-xl);
+  position: relative;
+}
+
+.service-detail__hero .service-card__coming-soon {
+  border-radius: var(--radius-md);
+  font-size: var(--text-6xl);
 }
 
 .service-detail__title {
