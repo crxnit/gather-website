@@ -15,14 +15,16 @@ Website for **Gather Catering and Events** — a catering and event services bus
 | Layer | Technology |
 |-------|------------|
 | Frontend | Plain HTML/CSS/JS — no framework, no build step |
-| Email/Forms | Google Apps Script → Google Workspace (info@gathercateringandevents.com) |
+| Email/Forms | Google Apps Script → Google Workspace (catering@gathercateringandevents.com) |
 | Hosting | Self-hosted Linux containers: Traefik (SSL + reverse proxy) → Nginx (static files) |
 | Backend | None initially; FastAPI container available if future features need it |
 
 ### Form Submission Flow
 1. User fills out inquiry form on the website
 2. Client-side JS POSTs form data to a deployed Google Apps Script web app URL
-3. Apps Script parses the data and sends email via Google Workspace to info@gathercateringandevents.com
+3. Apps Script sends two emails:
+   - **Confirmation** to the submitter — from `inquiry@gathercafeandevents.com`, reply-to `catering@gathercateringandevents.com`
+   - **Notification** to `catering@gathercateringandevents.com` with full lead details
 4. Optionally logs submissions to a Google Sheet
 
 ### Deployment
@@ -53,7 +55,7 @@ Website for **Gather Catering and Events** — a catering and event services bus
 Inspired by [togetherandco.com](https://togetherandco.com). Sections in order:
 
 1. **Full-width hero** (`hero-full`) — compact (35–45vh) background image (`display-table-closeup.jpg`) with dark gradient overlay, centered logo, tagline, heading, and description (no CTA button)
-2. **Services grid** — 5 service cards (image + title + description + "Learn More" link) in a centered flexbox layout (1→2→3 columns)
+2. **Services grid** — 6 service cards (image + title + description + "Learn More" link) in a centered flexbox layout (1→2→3 columns)
 3. **Testimonials** (`section--alt`) — 3 testimonial cards with star ratings in a 3-column grid, plus "Read More Reviews" link
 4. **CTA** — centered heading + "Request a Quote" button
 
@@ -65,6 +67,7 @@ Inspired by [togetherandco.com](https://togetherandco.com). Sections in order:
 - Mobile Bartending
 - Catering
 - Catering Staffing
+- Mobile Food Cart *(Coming Soon — pricing card shows "Coming Soon"; image has a semi-transparent overlay with "Coming Soon" text in brand style)*
 
 ### Other Pages
 - About Us
@@ -74,7 +77,7 @@ Inspired by [togetherandco.com](https://togetherandco.com). Sections in order:
 - Policies
 
 ### Dynamic Functionality
-- **Inquiry Form**: Generic (not wedding-focused), with service checkboxes, write-in budget field, open commentary field. Submits via email to info@gathercateringandevents.com. Reference: gather.jjocapps.com
+- **Inquiry Form**: Generic (not wedding-focused), with service checkboxes, write-in budget field, open commentary field. Sends confirmation to submitter and notification to catering@gathercateringandevents.com. Reference: gather.jjocapps.com
 - **External Links**: The Knot and Wedding Wire icons linking to their profiles
 
 ### CSS Architecture
