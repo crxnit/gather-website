@@ -322,7 +322,7 @@
   font-size: var(--text-5xl);
   color: var(--color-noodles);
   line-height: 1;
-  margin-bottom: var(--space-xs);
+  margin-bottom: var(--space-md);
 }
 
 .pricing-card__note {
@@ -352,6 +352,8 @@
   padding: var(--space-xs) 0;
   line-height: var(--line-height-relaxed);
   font-size: var(--text-sm);
+  display: flex;
+  align-items: flex-start;
 }
 
 .pricing-card__list li::before {
@@ -359,6 +361,7 @@
   color: var(--color-noodles);
   font-weight: var(--font-weight-semibold);
   margin-right: var(--space-sm);
+  flex-shrink: 0;
 }
 
 /* About Page */
