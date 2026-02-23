@@ -33,6 +33,33 @@
     { label: 'Policies', href: 'policies.html' }
   ];
 
+  // Single source of truth for testimonials — rendered on index.html and testimonials.html.
+  var TESTIMONIALS = [
+    {
+      quote: 'Gather made our corporate holiday party an absolute hit. The food was incredible, the staff was professional, and everything ran like clockwork. We\u2019ve already booked them for next year!',
+      author: 'Sarah M.',
+      event: 'Corporate Holiday Party'
+    },
+    {
+      quote: 'We hired Gather for day-of coordination and it was the best decision we made. They handled every detail with such grace and allowed us to truly enjoy our wedding day without any stress.',
+      author: 'James &amp; Emily R.',
+      event: 'Wedding Reception'
+    },
+    {
+      quote: 'The mobile bartending service was a huge hit at our fundraiser. The custom cocktail menu was creative and delicious, and the bartenders were engaging and professional. Highly recommend!',
+      author: 'Michael T.',
+      event: 'Charity Fundraiser Gala'
+    },
+    {
+      quote: 'From the very first meeting to the last guest leaving, Gather\u2019s full planning service exceeded our expectations. They understood our vision perfectly and brought it to life beautifully.',
+      author: 'Amanda &amp; David L.',
+      event: 'Anniversary Celebration'
+    }
+  ];
+
+  // Expose shared data so other scripts (e.g. form.js) can access it.
+  window.GATHER_SITE = { SERVICE_LINKS: SERVICE_LINKS };
+
   function buildServiceDropdownItems() {
     return SERVICE_LINKS.map(function (link) {
       return '<li><a href="' + url(link.href) + '">' + link.label + '</a></li>';
@@ -99,6 +126,50 @@
     '</div>';
   }
 
+  /** Render testimonial cards into a #testimonial-cards placeholder. */
+  function injectTestimonials() {
+    var container = document.getElementById('testimonial-cards');
+    if (!container) return;
+    var showAll = container.hasAttribute('data-show-all');
+    var items = showAll ? TESTIMONIALS : TESTIMONIALS.filter(function (_, i) { return i !== 2; });
+    container.innerHTML = items.map(function (t) {
+      var stars = showAll ? '' :
+        '<div class="testimonial-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>';
+      return '<div class="card testimonial-card reveal reveal--slide-up">' +
+        stars +
+        '<p class="testimonial-card__quote">' + t.quote + '</p>' +
+        '<p class="testimonial-card__author">' + t.author + '</p>' +
+        '<p class="testimonial-card__event">' + t.event + '</p>' +
+        '</div>';
+    }).join('');
+  }
+
+  /** Render CTA sections from [data-cta] placeholder elements. */
+  function injectCTAs() {
+    document.querySelectorAll('[data-cta]').forEach(function (el) {
+      var heading = el.getAttribute('data-heading');
+      var desc = el.getAttribute('data-description');
+      var btnText = el.getAttribute('data-button-text') || 'Request a Quote';
+      var btnStyle = el.getAttribute('data-button-style') || 'btn--primary';
+      var inner = '<h2>' + heading + '</h2>' +
+        '<p>' + desc + '</p>' +
+        '<a href="' + url('inquiry.html') + '" class="btn ' + btnStyle + ' btn--lg">' + btnText + '</a>';
+      var node;
+      if (el.hasAttribute('data-cta-inline')) {
+        // Service detail pages: render as a div inside the existing container.
+        node = document.createElement('div');
+        node.className = 'service-detail__cta reveal reveal--fade';
+      } else {
+        // Standalone pages: render as a full section with container.
+        node = document.createElement('section');
+        node.className = 'section text-center reveal reveal--fade';
+        inner = '<div class="container">' + inner + '</div>';
+      }
+      node.innerHTML = inner;
+      el.replaceWith(node);
+    });
+  }
+
   // Inject on DOM ready
   document.addEventListener('DOMContentLoaded', function () {
     const header = document.getElementById('site-header');
@@ -113,6 +184,9 @@
       footer.classList.add('site-footer');
       footer.innerHTML = getFooterHTML();
     }
+
+    injectTestimonials();
+    injectCTAs();
 
     // Highlight active nav link.
     // Normalize currentPath to just the filename (or path from root) for reliable matching.

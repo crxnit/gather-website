@@ -18,6 +18,9 @@
   --color-rosewood-light: #9A6776;
   --color-border: rgba(201, 214, 234, 0.15);
   --color-overlay: rgba(44, 62, 80, 0.85);
+  --color-overlay-light: rgba(44, 62, 80, 0.55);
+  --color-overlay-medium: rgba(44, 62, 80, 0.72);
+  --color-section-alt-bg: rgba(0, 0, 0, 0.12);
   --color-nav-hover-bg: rgba(249, 227, 180, 0.08);
   --color-input-bg: rgba(255, 255, 255, 0.08);
   --color-input-placeholder: rgba(201, 214, 234, 0.4);

@@ -15,6 +15,17 @@
     const form = document.getElementById('inquiry-form');
     if (!form) return;
 
+    // Generate service checkboxes from the shared link data in components.js.
+    var container = document.getElementById('service-checkboxes');
+    if (container && window.GATHER_SITE && window.GATHER_SITE.SERVICE_LINKS) {
+      container.innerHTML = window.GATHER_SITE.SERVICE_LINKS.map(function (svc) {
+        return '<label class="checkbox-label">' +
+          '<input type="checkbox" name="services" value="' + svc.label + '"> ' +
+          svc.label +
+          '</label>';
+      }).join('\n');
+    }
+
     const submitBtn = document.getElementById('submit-btn');
     const messageEl = document.getElementById('form-message');
     let isSubmitting = false;

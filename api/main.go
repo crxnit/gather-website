@@ -192,17 +192,20 @@ func sendMail(to, subject, plainBody, htmlBody, replyToAddr string) error {
 	return c.Quit()
 }
 
+// ── Helpers ──────────────────────────────────────────────────────────────────
+
+func fallback(val, def string) string {
+	if val == "" {
+		return def
+	}
+	return val
+}
+
 // ── Email builders ────────────────────────────────────────────────────────────
 
 func sendConfirmation(data inquiry) error {
-	services := strings.Join(data.Services, ", ")
-	if services == "" {
-		services = "Not specified"
-	}
-	budget := data.Budget
-	if budget == "" {
-		budget = "Not provided"
-	}
+	services := fallback(strings.Join(data.Services, ", "), "Not provided")
+	budget := fallback(data.Budget, "Not provided")
 
 	subject := "Thank you for your inquiry \u2014 Gather Catering and Events"
 
@@ -260,22 +263,10 @@ func sendConfirmation(data inquiry) error {
 }
 
 func sendNotification(data inquiry) error {
-	services := strings.Join(data.Services, ", ")
-	if services == "" {
-		services = "None selected"
-	}
-	phone := data.Phone
-	if phone == "" {
-		phone = "Not provided"
-	}
-	budget := data.Budget
-	if budget == "" {
-		budget = "Not provided"
-	}
-	details := data.Details
-	if details == "" {
-		details = "None"
-	}
+	services := fallback(strings.Join(data.Services, ", "), "Not provided")
+	phone := fallback(data.Phone, "Not provided")
+	budget := fallback(data.Budget, "Not provided")
+	details := fallback(data.Details, "None")
 
 	subject := fmt.Sprintf("New Website Lead - %s %s", data.FirstName, data.LastName)
 

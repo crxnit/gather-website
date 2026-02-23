@@ -84,7 +84,7 @@
 .service-card__coming-soon {
   position: absolute;
   inset: 0;
-  background: rgba(44, 62, 80, 0.72);
+  background: var(--color-overlay-medium);
   display: flex;
   align-items: center;
   justify-content: center;
