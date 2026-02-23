@@ -3,5 +3,5 @@
  * Copy this file to config.js and fill in the values.
  */
 var GATHER_CONFIG = {
-  APPS_SCRIPT_URL: 'YOUR_APPS_SCRIPT_URL_HERE'
+  API_URL: 'https://gathercateringandevents.com/api/submit'
 };
