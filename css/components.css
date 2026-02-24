@@ -310,6 +310,8 @@
   border-color: rgba(231, 76, 60, 0.5);
 }
 
+.form-hp { position: absolute; left: -9999px; height: 0; overflow: hidden; }
+
 /* Policy sections */
 .policy-section {
   margin-bottom: var(--space-2xl);

@@ -6,6 +6,7 @@
   'use strict';
 
   const API_URL = (typeof GATHER_CONFIG !== 'undefined' && GATHER_CONFIG.API_URL) || '';
+  const _loadTime = Date.now();
 
   function isConfigured() {
     return API_URL.startsWith('https://');
@@ -112,7 +113,9 @@
         services: services,
         budget: formData.get('budget') || '',
         details: formData.get('details') || '',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        website: formData.get('website') || '',
+        _elapsed: (Date.now() - _loadTime) / 1000
       };
     }
 

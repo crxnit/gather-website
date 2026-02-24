@@ -19,9 +19,11 @@ import (
 	"html"
 	"io"
 	"log"
+	"net"
 	"net/http"
 	"net/smtp"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -53,7 +55,91 @@ type inquiry struct {
 	Budget    string   `json:"budget"`
 	Details   string   `json:"details"`
 	Timestamp string   `json:"timestamp"`
+	Website   string   `json:"website"`
+	Elapsed   float64  `json:"_elapsed"`
 }
+
+// ── Rate limiter ─────────────────────────────────────────────────────────────
+
+const (
+	rateLimitWindow = time.Hour
+	rateLimitMax    = 5
+)
+
+type rateLimiter struct {
+	mu       sync.Mutex
+	requests map[string][]time.Time
+}
+
+func newRateLimiter() *rateLimiter {
+	rl := &rateLimiter{requests: make(map[string][]time.Time)}
+	go rl.cleanup()
+	return rl
+}
+
+func (rl *rateLimiter) allow(ip string) bool {
+	rl.mu.Lock()
+	defer rl.mu.Unlock()
+
+	now := time.Now()
+	cutoff := now.Add(-rateLimitWindow)
+
+	// Prune old entries for this IP
+	entries := rl.requests[ip]
+	valid := entries[:0]
+	for _, t := range entries {
+		if t.After(cutoff) {
+			valid = append(valid, t)
+		}
+	}
+
+	if len(valid) >= rateLimitMax {
+		rl.requests[ip] = valid
+		return false
+	}
+
+	rl.requests[ip] = append(valid, now)
+	return true
+}
+
+func (rl *rateLimiter) cleanup() {
+	ticker := time.NewTicker(10 * time.Minute)
+	defer ticker.Stop()
+	for range ticker.C {
+		rl.mu.Lock()
+		cutoff := time.Now().Add(-rateLimitWindow)
+		for ip, entries := range rl.requests {
+			valid := entries[:0]
+			for _, t := range entries {
+				if t.After(cutoff) {
+					valid = append(valid, t)
+				}
+			}
+			if len(valid) == 0 {
+				delete(rl.requests, ip)
+			} else {
+				rl.requests[ip] = valid
+			}
+		}
+		rl.mu.Unlock()
+	}
+}
+
+func clientIP(r *http.Request) string {
+	if xff := r.Header.Get("X-Forwarded-For"); xff != "" {
+		ip := strings.TrimSpace(strings.SplitN(xff, ",", 2)[0])
+		if parsed := net.ParseIP(ip); parsed != nil {
+			return parsed.String()
+		}
+	}
+	host, _, err := net.SplitHostPort(r.RemoteAddr)
+	if err != nil {
+		return r.RemoteAddr
+	}
+	return host
+}
+
+var limiter = newRateLimiter()
 
 // ── Entry point ───────────────────────────────────────────────────────────────
 
@@ -91,6 +177,30 @@ func handleSubmit(w http.ResponseWriter, r *http.Request) {
 	var data inquiry
 	if err := json.NewDecoder(r.Body).Decode(&data); err != nil {
 		jsonError(w, "Invalid request body", http.StatusBadRequest)
+		return
+	}
+
+	// Rate limit check
+	ip := clientIP(r)
+	if !limiter.allow(ip) {
+		log.Printf("Rate limit exceeded for %s", ip)
+		jsonError(w, "Too many requests. Please try again later.", http.StatusTooManyRequests)
+		return
+	}
+
+	// Honeypot check — fake success so bots don't adapt
+	if data.Website != "" {
+		log.Printf("Honeypot triggered from %s", ip)
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(map[string]string{"status": "success"})
+		return
+	}
+
+	// Time-based check — real humans take more than 3 seconds
+	if data.Elapsed < 3 {
+		log.Printf("Time check failed (%.1fs) from %s", data.Elapsed, ip)
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(map[string]string{"status": "success"})
 		return
 	}
 
