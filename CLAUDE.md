@@ -27,9 +27,10 @@ HTML pages are assembled from shared partials + per-page source files by `build.
 | `src/_partials/` | Shared HTML fragments (`<head>`, body open/close, scripts) |
 | `src/pages/` | Source files for root-level pages (index, about, inquiry, testimonials, policies) |
 | `src/services/` | Source files for the 6 service detail pages |
+| `publish/` | Build output — generated HTML pages (root pages + `services/` subdir) |
 | `html-v1/` | Pre-build-system HTML snapshot (permanent reference) |
 
-**Workflow:** Edit files in `src/`, run `./build.sh`, generated HTML appears at the project root. Source files use comment front matter (`<!-- TITLE: ... -->`, `<!-- DESC: ... -->`). The `{{PATH}}` placeholder in partials handles relative paths (`""` for root pages, `"../"` for service pages).
+**Workflow:** Edit files in `src/`, run `./build.sh`, generated HTML appears in `publish/`. Source files use comment front matter (`<!-- TITLE: ... -->`, `<!-- DESC: ... -->`). The `{{PATH}}` placeholder in partials handles relative paths (`"../"` for root pages, `"../../"` for service pages) so they resolve back to the project root where CSS/JS/images live.
 
 ### Form Submission Flow
 1. User fills out inquiry form on the website

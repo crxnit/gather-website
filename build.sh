@@ -12,15 +12,14 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PARTIALS="$SCRIPT_DIR/src/_partials"
+OUT_DIR="$SCRIPT_DIR/publish"
 
 # ── Clean mode ────────────────────────────────────────────────────────────────
 
 if [[ "${1:-}" == "--clean" ]]; then
   echo "Cleaning generated HTML..."
-  for f in "$SCRIPT_DIR"/src/pages/*.html; do
-    rm -f "$SCRIPT_DIR/$(basename "$f")"
-  done
-  rm -f "$SCRIPT_DIR"/services/*.html
+  rm -f "$OUT_DIR"/*.html
+  rm -f "$OUT_DIR"/services/*.html
   echo "Cleaned. Rebuilding..."
 fi
 
@@ -67,16 +66,16 @@ build_page() {
 
 echo "Building site..."
 
-# Root-level pages (no path prefix)
+# Root-level pages (../ prefix to reach assets at project root)
 for src in "$SCRIPT_DIR"/src/pages/*.html; do
   name="$(basename "$src")"
-  build_page "$src" "$SCRIPT_DIR/$name" ""
+  build_page "$src" "$OUT_DIR/$name" "../"
 done
 
-# Service pages (../ prefix for assets)
+# Service pages (../../ prefix to reach assets at project root)
 for src in "$SCRIPT_DIR"/src/services/*.html; do
   name="$(basename "$src")"
-  build_page "$src" "$SCRIPT_DIR/services/$name" "../"
+  build_page "$src" "$OUT_DIR/services/$name" "../../"
 done
 
 echo "Done. Built $(ls "$SCRIPT_DIR"/src/pages/*.html "$SCRIPT_DIR"/src/services/*.html 2>/dev/null | wc -l | tr -d ' ') pages."

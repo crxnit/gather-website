@@ -30,6 +30,7 @@
   const PAGE_LINKS = [
     { label: 'About Us', href: 'about.html' },
     { label: 'Testimonials', href: 'testimonials.html' },
+    { label: 'FAQs', href: 'faq.html' },
     { label: 'Policies', href: 'policies.html' }
   ];
 
