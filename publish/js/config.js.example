@@ -1,0 +1,7 @@
+/**
+ * Site configuration — contains deployment-specific values.
+ * Copy this file to config.js and fill in the values.
+ */
+var GATHER_CONFIG = {
+  API_URL: 'https://gathercateringandevents.com/api/submit'
+};

@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 # ──────────────────────────────────────────────────────────────────────────────
-# build.sh — Assembles final HTML pages from src/ partials and page sources.
+# build.sh — Assembles a complete, deployable site in publish/.
+#
+# Every run wipes publish/ and rebuilds it from scratch:
+#   - Copies css/, js/, and images/ into publish/
+#   - Assembles all HTML pages from src/ partials and page sources
 #
 # Usage:
-#   ./build.sh            Build all pages
-#   ./build.sh --clean    Remove generated HTML before rebuilding
+#   ./build.sh        Build the full site
+#   ./build.sh --clean    Alias for the above (always a clean build)
 #
 # See BUILD.md for full documentation.
 # ──────────────────────────────────────────────────────────────────────────────
@@ -14,14 +18,17 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PARTIALS="$SCRIPT_DIR/src/_partials"
 OUT_DIR="$SCRIPT_DIR/publish"
 
-# ── Clean mode ────────────────────────────────────────────────────────────────
+# ── Reset publish/ ────────────────────────────────────────────────────────────
 
-if [[ "${1:-}" == "--clean" ]]; then
-  echo "Cleaning generated HTML..."
-  rm -f "$OUT_DIR"/*.html
-  rm -f "$OUT_DIR"/services/*.html
-  echo "Cleaned. Rebuilding..."
-fi
+echo "Building site..."
+rm -rf "$OUT_DIR"
+mkdir -p "$OUT_DIR/services"
+
+# ── Copy static assets ────────────────────────────────────────────────────────
+
+cp -r "$SCRIPT_DIR/css"    "$OUT_DIR/"
+cp -r "$SCRIPT_DIR/js"     "$OUT_DIR/"
+cp -r "$SCRIPT_DIR/images" "$OUT_DIR/"
 
 # ── Build function ────────────────────────────────────────────────────────────
 
@@ -45,9 +52,6 @@ build_page() {
     close="$PARTIALS/body-close-form.html"
   fi
 
-  # Ensure output directory exists
-  mkdir -p "$(dirname "$dest")"
-
   # Assemble the page
   {
     cat "$PARTIALS/head-top.html"
@@ -64,18 +68,16 @@ build_page() {
 
 # ── Build all pages ───────────────────────────────────────────────────────────
 
-echo "Building site..."
-
-# Root-level pages (../ prefix to reach assets at project root)
+# Root-level pages (assets co-located in publish/, no prefix needed)
 for src in "$SCRIPT_DIR"/src/pages/*.html; do
   name="$(basename "$src")"
-  build_page "$src" "$OUT_DIR/$name" "../"
+  build_page "$src" "$OUT_DIR/$name" ""
 done
 
-# Service pages (../../ prefix to reach assets at project root)
+# Service pages (../ prefix to reach assets in publish/)
 for src in "$SCRIPT_DIR"/src/services/*.html; do
   name="$(basename "$src")"
-  build_page "$src" "$OUT_DIR/services/$name" "../../"
+  build_page "$src" "$OUT_DIR/services/$name" "../"
 done
 
 echo "Done. Built $(ls "$SCRIPT_DIR"/src/pages/*.html "$SCRIPT_DIR"/src/services/*.html 2>/dev/null | wc -l | tr -d ' ') pages."
