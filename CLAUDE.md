@@ -58,6 +58,9 @@ Three zero-friction layers protect the inquiry form from bot submissions:
 
 Validation order in `handleSubmit`: decode → rate limit → honeypot → time check → required fields → send emails. Honeypot and time checks return fake success to avoid revealing protection mechanisms.
 
+### CORS Policy
+The Go API allows cross-origin requests from both domains and all their subdomains. The `isAllowedOrigin()` function in `api/main.go` matches the `Origin` header against `gathercateringandevents.com` and `gathercafeandevents.com` using domain-suffix matching (e.g., `www.`, `api.`, `preview.` subdomains are all permitted). Nginx does not set CORS headers — static assets are served same-origin.
+
 ### SMTP Implementation
 The Go API uses `net/textproto` (NOT `net/smtp`) to drive the SMTP conversation. Go's `net/smtp` package hardcodes `EHLO localhost`, which Google's SMTP relay rejects with a 421. Using `net/textproto` lets us send `EHLO gathercateringandevents.com` and control every step of the protocol. See `api/SMTP.md` for full details and debugging history.
 
