@@ -13,7 +13,6 @@
 package main
 
 import (
-	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"html"
@@ -21,7 +20,7 @@ import (
 	"log"
 	"net"
 	"net/http"
-	"net/smtp"
+	"net/textproto"
 	"strings"
 	"sync"
 	"time"
@@ -32,6 +31,7 @@ import (
 const (
 	smtpHost          = "smtp-relay.gmail.com"
 	smtpPort          = "25"
+	smtpHelo          = "gathercateringandevents.com"
 	fromAddress       = "web-inquiry@gathercateringandevents.com"
 	fromName          = "Gather Catering and Events"
 	notificationEmail = "catering@gathercateringandevents.com"
@@ -250,56 +250,91 @@ func jsonError(w http.ResponseWriter, msg string, code int) {
 
 // ── SMTP ──────────────────────────────────────────────────────────────────────
 
+// sendMail delivers an email via the SMTP relay using net/textproto directly.
+// This avoids Go's net/smtp package which hardcodes EHLO as "localhost",
+// causing Google's relay to reject the connection with 421.
 func sendMail(to, subject, plainBody, htmlBody, replyToAddr string) error {
 	const boundary = "GatherBoundary42"
 
-	header := fmt.Sprintf(
+	msg := fmt.Sprintf(
 		"From: %s <%s>\r\nTo: %s\r\nSubject: %s\r\nReply-To: %s\r\n"+
-			"MIME-Version: 1.0\r\nContent-Type: multipart/alternative; boundary=%q\r\n\r\n",
-		fromName, fromAddress, to, subject, replyToAddr, boundary,
-	)
-
-	body := fmt.Sprintf(
-		"--%s\r\nContent-Type: text/plain; charset=utf-8\r\n\r\n%s\r\n\r\n"+
+			"MIME-Version: 1.0\r\nContent-Type: multipart/alternative; boundary=%q\r\n\r\n"+
+			"--%s\r\nContent-Type: text/plain; charset=utf-8\r\n\r\n%s\r\n\r\n"+
 			"--%s\r\nContent-Type: text/html; charset=utf-8\r\n\r\n%s\r\n\r\n"+
 			"--%s--",
+		fromName, fromAddress, to, subject, replyToAddr, boundary,
 		boundary, plainBody,
 		boundary, htmlBody,
 		boundary,
 	)
 
-	c, err := smtp.Dial(smtpHost + ":" + smtpPort)
+	// Connect
+	conn, err := net.DialTimeout("tcp", smtpHost+":"+smtpPort, 10*time.Second)
 	if err != nil {
 		return fmt.Errorf("dial: %w", err)
 	}
-	defer c.Close()
+	defer conn.Close()
 
-	if ok, _ := c.Extension("STARTTLS"); ok {
-		cfg := &tls.Config{ServerName: smtpHost}
-		if err := c.StartTLS(cfg); err != nil {
-			return fmt.Errorf("starttls: %w", err)
-		}
-	}
+	tc := textproto.NewConn(conn)
+	defer tc.Close()
 
-	if err := c.Mail(fromAddress); err != nil {
-		return fmt.Errorf("MAIL FROM: %w", err)
-	}
-	if err := c.Rcpt(to); err != nil {
-		return fmt.Errorf("RCPT TO: %w", err)
+	// Read 220 greeting
+	if _, _, err := tc.ReadResponse(220); err != nil {
+		return fmt.Errorf("greeting: %w", err)
 	}
 
-	wc, err := c.Data()
-	if err != nil {
-		return fmt.Errorf("DATA: %w", err)
+	// EHLO with our actual domain
+	if _, err := tc.Cmd("EHLO %s", smtpHelo); err != nil {
+		return fmt.Errorf("EHLO send: %w", err)
 	}
-	if _, err := io.WriteString(wc, header+body); err != nil {
-		return fmt.Errorf("write: %w", err)
-	}
-	if err := wc.Close(); err != nil {
-		return fmt.Errorf("close data: %w", err)
+	if _, _, err := tc.ReadResponse(250); err != nil {
+		return fmt.Errorf("EHLO response: %w", err)
 	}
 
-	return c.Quit()
+	// MAIL FROM
+	if _, err := tc.Cmd("MAIL FROM:<%s>", fromAddress); err != nil {
+		return fmt.Errorf("MAIL FROM send: %w", err)
+	}
+	if _, _, err := tc.ReadResponse(250); err != nil {
+		return fmt.Errorf("MAIL FROM response: %w", err)
+	}
+
+	// RCPT TO
+	if _, err := tc.Cmd("RCPT TO:<%s>", to); err != nil {
+		return fmt.Errorf("RCPT TO send: %w", err)
+	}
+	if _, _, err := tc.ReadResponse(250); err != nil {
+		return fmt.Errorf("RCPT TO response: %w", err)
+	}
+
+	// DATA
+	if _, err := tc.Cmd("DATA"); err != nil {
+		return fmt.Errorf("DATA send: %w", err)
+	}
+	if _, _, err := tc.ReadResponse(354); err != nil {
+		return fmt.Errorf("DATA response: %w", err)
+	}
+
+	// Write message body using dot-encoding writer
+	w := tc.DotWriter()
+	if _, err := io.WriteString(w, msg); err != nil {
+		w.Close()
+		return fmt.Errorf("write body: %w", err)
+	}
+	if err := w.Close(); err != nil {
+		return fmt.Errorf("close body: %w", err)
+	}
+
+	// Read response after dot
+	if _, _, err := tc.ReadResponse(250); err != nil {
+		return fmt.Errorf("DATA done: %w", err)
+	}
+
+	// QUIT
+	tc.Cmd("QUIT")
+	tc.ReadResponse(221)
+
+	return nil
 }
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
