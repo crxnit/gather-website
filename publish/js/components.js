@@ -31,9 +31,7 @@
     { label: 'About Us', href: 'about.html' },
     { label: 'Testimonials', href: 'testimonials.html' },
     { label: 'FAQs', href: 'faq.html' },
-    { label: 'Policies', href: 'policies.html' },
-    { label: 'Terms of Use', href: 'terms-of-use.html' },
-    { label: 'Privacy Policy', href: 'privacy-policy.html' }
+    { label: 'Policies', href: 'policies.html' }
   ];
 
   // Single source of truth for testimonials — rendered on index.html and testimonials.html.
@@ -115,6 +113,8 @@
       '</div>' +
       '<div class="footer-copyright">' +
         '&copy; ' + new Date().getFullYear() + ' Gather Catering and Events. All rights reserved.' +
+        ' <a href="' + url('terms-of-use.html') + '">Terms of Use</a>' +
+        ' | <a href="' + url('privacy-policy.html') + '">Privacy Policy</a>' +
       '</div>' +
     '</div>';
   }
