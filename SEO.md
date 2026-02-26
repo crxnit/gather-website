@@ -192,17 +192,17 @@ Every service page H1 is the bare service name with no location or keyword conte
 ---
 
 ### ✅ 9. Body Copy — Broaden Beyond Weddings
-**Completed 2026-02-26 — client review pending**
+**Completed 2026-02-26**
 
-Several service descriptions read as wedding-only, causing non-wedding searchers to bounce. v2 preview pages were created for client review. The originals are untouched; once the client approves, the v2 files replace them.
+Several service descriptions read as wedding-only, causing non-wedding searchers to bounce. Updated 5 pages with inclusive language. Wedding references retained — corporate events, private parties, and other celebrations added throughout.
 
-| Page | Preview URL | Key Changes |
-|------|-------------|-------------|
-| Homepage | `/index-v2.html` | Service card descriptions for Full Planning, Day-Of, Bartending, Catering broadened |
-| Full Planning | `/services/full-planning-v2.html` | "couples/wedding" → "anyone/event"; sections renamed Pre-Event and Event Day |
-| Day-Of Coordinating | `/services/day-of-coordinating-v2.html` | "wedding" → "event" throughout; "first look" → "first arrival" |
-| Catering | `/services/catering-v2.html` | "wedding" → "wedding, corporate gathering, or private celebration" |
-| Mobile Bartending | `/services/mobile-bartending-v2.html` | Broadened to include corporate events and private parties |
+| Page | Key Changes |
+|------|-------------|
+| Homepage | Service card descriptions broadened for Full Planning, Day-Of, Bartending, and Catering |
+| Full Planning | "couples/wedding" → "anyone/event"; pricing sections renamed Pre-Event and Event Day |
+| Day-Of Coordinating | "wedding" → "event" throughout; "first look" → "first arrival"; "couples" → "anyone" |
+| Catering | "wedding" → "wedding, corporate gathering, or private celebration" |
+| Mobile Bartending | Broadened to include corporate events and private parties alongside weddings |
 
 ---
 
