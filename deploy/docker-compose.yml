@@ -4,8 +4,8 @@ services:
     container_name: gather-web
     restart: unless-stopped
     volumes:
-      # Site files — clone the repo on the server and point here
-      - ../:/usr/share/nginx/html:ro
+      # Site files — built by ./build.sh into publish/
+      - ../publish:/usr/share/nginx/html:ro
       # Nginx config
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
     networks:
