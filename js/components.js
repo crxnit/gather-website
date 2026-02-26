@@ -163,7 +163,7 @@
       } else {
         // Standalone pages: render as a full section with container.
         node = document.createElement('section');
-        node.className = 'section section--cta text-center reveal reveal--fade';
+        node.className = 'section section--cta' + (el.hasAttribute('data-cta-no-line') ? ' section--cta--no-line' : '') + ' text-center reveal reveal--fade';
         inner = '<div class="container">' + inner + '</div>';
       }
       node.innerHTML = inner;
