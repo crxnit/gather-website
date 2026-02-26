@@ -113,7 +113,8 @@
       '</div>' +
       '<div class="footer-copyright">' +
         '&copy; ' + new Date().getFullYear() + ' Gather Catering and Events. All rights reserved.' +
-        ' <a href="' + url('terms-of-use.html') + '">Terms of Use</a>' +
+        '<br>' +
+        '<a href="' + url('terms-of-use.html') + '">Terms of Use</a>' +
         ' | <a href="' + url('privacy-policy.html') + '">Privacy Policy</a>' +
       '</div>' +
     '</div>';
