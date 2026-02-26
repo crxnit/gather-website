@@ -39,24 +39,14 @@
   // Single source of truth for testimonials — rendered on index.html and testimonials.html.
   var TESTIMONIALS = [
     {
-      quote: 'Gather made our corporate holiday party an absolute hit. The food was incredible, the staff was professional, and everything ran like clockwork. We\u2019ve already booked them for next year!',
-      author: 'Sarah M.',
-      event: 'Corporate Holiday Party'
+      quote: 'Josh and Liz were fantastic\u2014communication was smooth, responsive, and reassuring throughout the entire process. They provided an amazing catering experience for me this fall. The food was delicious and a huge hit with our group, and their attention to detail made everything run perfectly. You can tell they truly care about delivering a top-notch experience. Highly recommend!',
+      author: 'Amanda S.',
+      rating: 5.0
     },
     {
-      quote: 'We hired Gather for day-of coordination and it was the best decision we made. They handled every detail with such grace and allowed us to truly enjoy our wedding day without any stress.',
-      author: 'James &amp; Emily R.',
-      event: 'Wedding Reception'
-    },
-    {
-      quote: 'The mobile bartending service was a huge hit at our fundraiser. The custom cocktail menu was creative and delicious, and the bartenders were engaging and professional. Highly recommend!',
-      author: 'Michael T.',
-      event: 'Charity Fundraiser Gala'
-    },
-    {
-      quote: 'From the very first meeting to the last guest leaving, Gather\u2019s full planning service exceeded our expectations. They understood our vision perfectly and brought it to life beautifully.',
-      author: 'Amanda &amp; David L.',
-      event: 'Anniversary Celebration'
+      quote: 'Josh and Liz provided exemplary personalized event support in June 2025 for a 175 person annual mix and mingle. Our guests expect friendly service, delicious fare and we appreciated their punctual arrival, organized \u2018back of house\u2019 prep station and thorough clean-up once they finished. Our non-profit team noticed a difference having their top-notch team oversee all of the set-up/food prep/presentation/refill/clean-up versus other years when our board team tried to manage various parts of the mingie event. With Gather, patrons and organizers alike will be able to enjoy the event fully, start to finish. I highly recommend the Gather team for any event, large or small, to help plan, organize and execute a memorable event experience. We will be recommending Gather within our circles and beyond. Gather now and enjoy!',
+      author: 'Deb P.',
+      rating: 5.0
     }
   ];
 
@@ -134,15 +124,16 @@
     var container = document.getElementById('testimonial-cards');
     if (!container) return;
     var showAll = container.hasAttribute('data-show-all');
-    var items = showAll ? TESTIMONIALS : TESTIMONIALS.filter(function (_, i) { return i !== 2; });
-    container.innerHTML = items.map(function (t) {
+    container.innerHTML = TESTIMONIALS.map(function (t) {
+      var fullStars = Math.round(t.rating || 5);
+      var starHtml = '';
+      for (var i = 0; i < fullStars; i++) starHtml += '&#9733;';
       var stars = showAll ? '' :
-        '<div class="testimonial-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>';
+        '<div class="testimonial-card__stars" aria-label="' + fullStars + ' out of 5 stars">' + starHtml + '</div>';
       return '<div class="card testimonial-card reveal reveal--slide-up">' +
         stars +
         '<p class="testimonial-card__quote">' + t.quote + '</p>' +
         '<p class="testimonial-card__author">' + t.author + '</p>' +
-        '<p class="testimonial-card__event">' + t.event + '</p>' +
         '</div>';
     }).join('');
   }
