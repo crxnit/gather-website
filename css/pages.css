@@ -223,6 +223,12 @@
   position: relative;
 }
 
+.service-detail__hero picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .service-detail__hero .service-card__coming-soon {
   border-radius: var(--radius-md);
   font-size: var(--text-6xl);
