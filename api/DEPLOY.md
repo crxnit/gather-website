@@ -70,6 +70,9 @@ docker build -t gather-api .
 ## Notes
 
 - **SMTP relay**: The container must run on a host whose IP is authorized in Google Workspace Admin → Apps → Google Workspace → Gmail → Routing → SMTP relay. No credentials are baked into the image.
+- **SMTP implementation**: The API uses `net/textproto` instead of Go's `net/smtp` package. Go's `net/smtp` hardcodes `EHLO localhost`, which Google's SMTP relay rejects with a 421. See `SMTP.md` for the full explanation and debugging history.
+- **EHLO hostname**: Controlled by the `smtpHelo` constant in `main.go` (currently `gathercateringandevents.com`). If the domain changes, update this constant.
+- **No TLS**: The SMTP relay is IP-authenticated on the internal network. The connection uses plain SMTP on port 25 without STARTTLS. No CA certificates are needed in the container.
 - **Rate limiting**: The in-memory rate limiter resets when the container restarts. This is acceptable for the current traffic volume.
 - **Stateless**: No volumes or persistent storage needed.
 - **Port**: The API listens on `8000` inside the container. Map it to whatever host port suits your setup.
