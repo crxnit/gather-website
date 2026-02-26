@@ -196,6 +196,13 @@
   margin-top: var(--space-xs);
 }
 
+.testimonial-card__read-more {
+  font-style: normal;
+  font-size: var(--text-sm);
+  color: var(--color-rosewood);
+  white-space: nowrap;
+}
+
 /* Form Elements */
 .form-group {
   margin-bottom: var(--space-lg);

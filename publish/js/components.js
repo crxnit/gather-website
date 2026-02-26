@@ -130,9 +130,16 @@
       for (var i = 0; i < fullStars; i++) starHtml += '&#9733;';
       var stars = showAll ? '' :
         '<div class="testimonial-card__stars" aria-label="' + fullStars + ' out of 5 stars">' + starHtml + '</div>';
+      var quoteText = t.quote;
+      if (!showAll && quoteText.length > 250) {
+        var truncated = quoteText.substring(0, 250);
+        var lastSpace = truncated.lastIndexOf(' ');
+        if (lastSpace > 0) truncated = truncated.substring(0, lastSpace);
+        quoteText = truncated + '&#8230; <a href="' + url('testimonials.html') + '" class="testimonial-card__read-more">Read more</a>';
+      }
       return '<div class="card testimonial-card reveal reveal--slide-up">' +
         stars +
-        '<p class="testimonial-card__quote">' + t.quote + '</p>' +
+        '<p class="testimonial-card__quote">' + quoteText + '</p>' +
         '<p class="testimonial-card__author">' + t.author + '</p>' +
         '</div>';
     }).join('');

@@ -159,7 +159,7 @@
 
 @media (min-width: 768px) {
   .grid--testimonials {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
