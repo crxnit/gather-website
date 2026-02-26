@@ -475,7 +475,11 @@
 }
 
 .page-header h1 {
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.page-header p {
+  margin-bottom: 0;
 }
 
 @media (min-width: 768px) {
