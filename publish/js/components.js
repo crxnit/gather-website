@@ -128,8 +128,7 @@
       var fullStars = Math.round(t.rating || 5);
       var starHtml = '';
       for (var i = 0; i < fullStars; i++) starHtml += '&#9733;';
-      var stars = showAll ? '' :
-        '<div class="testimonial-card__stars" aria-label="' + fullStars + ' out of 5 stars">' + starHtml + '</div>';
+      var stars = '<div class="testimonial-card__stars" aria-label="' + fullStars + ' out of 5 stars">' + starHtml + '</div>';
       var quoteText = t.quote;
       if (!showAll && quoteText.length > 250) {
         var truncated = quoteText.substring(0, 250);
@@ -138,9 +137,9 @@
         quoteText = truncated + '&#8230; <a href="' + url('testimonials.html') + '" class="testimonial-card__read-more">Read more</a>';
       }
       return '<div class="card testimonial-card reveal reveal--slide-up">' +
-        stars +
-        '<p class="testimonial-card__quote">' + quoteText + '</p>' +
         '<p class="testimonial-card__author">' + t.author + '</p>' +
+        '<p class="testimonial-card__quote">' + quoteText + '</p>' +
+        stars +
         '</div>';
     }).join('');
   }
