@@ -30,7 +30,14 @@ HTML pages are assembled from shared partials + per-page source files by `build.
 | `publish/` | Build output — generated HTML pages (root pages + `services/` subdir) |
 | `html-v1/` | Pre-build-system HTML snapshot (permanent reference) |
 
-**Workflow:** Edit files in `src/`, run `./build.sh`, generated HTML appears in `publish/`. Source files use comment front matter (`<!-- TITLE: ... -->`, `<!-- DESC: ... -->`). The `{{PATH}}` placeholder in partials handles relative paths (`"../"` for root pages, `"../../"` for service pages) so they resolve back to the project root where CSS/JS/images live.
+**Workflow:** Edit files in `src/`, run `./build.sh`, generated HTML appears in `publish/`. Source files use comment front matter (`<!-- TITLE: ... -->`, `<!-- DESC: ... -->`). Partials use two placeholders:
+
+| Placeholder | Replaced with | Purpose |
+|-------------|---------------|---------|
+| `{{PATH}}` | `""` (root) or `"../"` (services) | Relative path prefix for CSS/JS/image references |
+| `{{BUILD}}` | Unix timestamp (`date +%s`) | Cache-busting query string appended to all CSS and JS URLs |
+
+Every build produces unique URLs (e.g., `css/base.css?v=1772127832`), forcing browsers to fetch fresh assets.
 
 ### Form Submission Flow
 1. User fills out inquiry form on the website
@@ -133,7 +140,7 @@ Inspired by [togetherandco.com](https://togetherandco.com). Sections in order:
 - **Service cards**: Centered flexbox grid — incomplete last row is centered
 - **Service detail pages**: All headings and body text centered; bullet lists centered as a block
 - **Footer**: Fully centered layout with two vendor badges (The Knot, WeddingWire)
-- **Caching**: All HTML pages include no-cache meta tags for development
+- **Caching**: Aggressively disabled for development — Nginx disables ETags, If-Modified-Since, and Last-Modified; sends `no-cache, no-store, must-revalidate` on all HTML/CSS/JS; `build.sh` appends `?v=TIMESTAMP` to every CSS/JS reference for cache-busting (see `deploy/nginx.conf`)
 
 ### Future Versions
 - Social media links
