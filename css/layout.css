@@ -239,6 +239,10 @@ main {
   }
 }
 
+.section--cta {
+  border-top: 1px solid var(--color-border);
+}
+
 /* Grid utilities */
 .grid {
   display: grid;
