@@ -71,7 +71,7 @@ build_page() {
     printf '  <meta property="og:site_name" content="Gather Catering and Events">\n'
     printf '  <meta property="og:title" content="%s">\n' "$title"
     printf '  <meta property="og:description" content="%s">\n' "$desc"
-    printf '  <meta property="og:image" content="https://gathercateringandevents.com/images/lg/hero-bg.jpg">\n'
+    printf '  <meta property="og:image" content="https://gathercateringandevents.com/images/GATHER.jpg">\n'
     printf '  <meta property="og:url" content="%s">\n' "$canonical_url"
     printf '  <link rel="canonical" href="%s">\n' "$canonical_url"
     sed -e "s|{{PATH}}|${path_prefix}|g" -e "s|{{BUILD}}|${BUILD_TS}|g" "$PARTIALS/head-bottom.html"
