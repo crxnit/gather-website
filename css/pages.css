@@ -479,7 +479,21 @@
   }
 }
 
-/* Policies page */
+.page-header + .section {
+  padding-top: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .page-header + .section {
+    padding-top: var(--space-xl);
+  }
+}
+
+/* Reduced bottom padding for pages with a CTA section below */
+.section--page-bottom {
+  padding-bottom: 70px;
+}
+
 .policies-content {
   max-width: var(--container-narrow);
   margin-inline: auto;
@@ -493,6 +507,14 @@
 
 .faq-group {
   margin-bottom: var(--space-2xl);
+}
+
+.faq-group:last-child {
+  margin-bottom: 0;
+}
+
+.faq-item:last-child {
+  margin-bottom: 0;
 }
 
 .faq-group-title {

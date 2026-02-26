@@ -240,7 +240,20 @@ main {
 }
 
 .section--cta {
+  padding-top: var(--space-md);
+  padding-bottom: var(--space-xl);
+}
+
+@media (min-width: 768px) {
+  .section--cta {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-2xl);
+  }
+}
+
+.section--cta .container {
   border-top: 1px solid var(--color-border);
+  padding-top: var(--space-lg);
 }
 
 /* Grid utilities */
