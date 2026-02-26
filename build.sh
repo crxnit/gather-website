@@ -43,6 +43,15 @@ build_page() {
   title="$(grep '^<!-- TITLE: ' "$src" | sed 's/^<!-- TITLE: \(.*\) -->$/\1/')"
   desc="$(grep '^<!-- DESC: ' "$src" | sed 's/^<!-- DESC: \(.*\) -->$/\1/')"
 
+  # Compute canonical URL from dest path
+  local rel_path canonical_url
+  rel_path="${dest#$OUT_DIR}"
+  if [ "$rel_path" = "/index.html" ]; then
+    canonical_url="https://gathercateringandevents.com/"
+  else
+    canonical_url="https://gathercateringandevents.com${rel_path}"
+  fi
+
   # Extract body content (everything except front matter comments, strip leading blank lines)
   local body
   body="$(grep -v '^<!-- TITLE: \|^<!-- DESC: \|^<!-- SCRIPTS: ' "$src" | sed '/./,$!d')"
@@ -58,6 +67,13 @@ build_page() {
     cat "$PARTIALS/head-top.html"
     printf '  <title>%s</title>\n' "$title"
     printf '  <meta name="description" content="%s">\n' "$desc"
+    printf '  <meta property="og:type" content="website">\n'
+    printf '  <meta property="og:site_name" content="Gather Catering and Events">\n'
+    printf '  <meta property="og:title" content="%s">\n' "$title"
+    printf '  <meta property="og:description" content="%s">\n' "$desc"
+    printf '  <meta property="og:image" content="https://gathercateringandevents.com/images/lg/hero-bg.jpg">\n'
+    printf '  <meta property="og:url" content="%s">\n' "$canonical_url"
+    printf '  <link rel="canonical" href="%s">\n' "$canonical_url"
     sed -e "s|{{PATH}}|${path_prefix}|g" -e "s|{{BUILD}}|${BUILD_TS}|g" "$PARTIALS/head-bottom.html"
     sed "s|{{PATH}}|${path_prefix}|g" "$PARTIALS/body-open.html"
     printf '%s\n' "$body"
@@ -80,5 +96,27 @@ for src in "$SCRIPT_DIR"/src/services/*.html; do
   name="$(basename "$src")"
   build_page "$src" "$OUT_DIR/services/$name" "../"
 done
+
+# ── Generate sitemap.xml ──────────────────────────────────────────────────────
+
+TODAY="$(date +%Y-%m-%d)"
+{
+  printf '<?xml version="1.0" encoding="UTF-8"?>\n'
+  printf '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+  printf '  <url><loc>https://gathercateringandevents.com/</loc><lastmod>%s</lastmod><priority>1.0</priority></url>\n' "$TODAY"
+  for page in about faq inquiry policies testimonials; do
+    printf '  <url><loc>https://gathercateringandevents.com/%s.html</loc><lastmod>%s</lastmod><priority>0.8</priority></url>\n' "$page" "$TODAY"
+  done
+  for service in catering-staffing catering day-of-coordinating full-planning mobile-bartending mobile-food-cart; do
+    printf '  <url><loc>https://gathercateringandevents.com/services/%s.html</loc><lastmod>%s</lastmod><priority>0.9</priority></url>\n' "$service" "$TODAY"
+  done
+  printf '</urlset>\n'
+} > "$OUT_DIR/sitemap.xml"
+echo "  $OUT_DIR/sitemap.xml"
+
+# ── Copy robots.txt ───────────────────────────────────────────────────────────
+
+cp "$SCRIPT_DIR/robots.txt" "$OUT_DIR/robots.txt"
+echo "  $OUT_DIR/robots.txt"
 
 echo "Done. Built $(ls "$SCRIPT_DIR"/src/pages/*.html "$SCRIPT_DIR"/src/services/*.html 2>/dev/null | wc -l | tr -d ' ') pages."
