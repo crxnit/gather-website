@@ -143,7 +143,7 @@ Includes: business name, URL, email, description, Cincinnati address, both citie
 ---
 
 ### ✅ 5. Open Graph Tags
-**Completed 2026-02-26**
+**Completed 2026-02-26 · OG image updated 2026-02-26**
 
 Added to `build.sh` so every page gets correct, page-specific OG tags automatically at build time. Tags output per page:
 
@@ -152,9 +152,7 @@ Added to `build.sh` so every page gets correct, page-specific OG tags automatica
 - `og:title` — pulled from each page's `<!-- TITLE: -->` front matter
 - `og:description` — pulled from each page's `<!-- DESC: -->` front matter
 - `og:url` — computed canonical URL per page
-- `og:image` — currently using `images/lg/hero-bg.jpg` as a placeholder
-
-> **Remaining:** A dedicated OG image (`og-social.jpg`, 1200×630px — Gather logo on brand background) should be designed and the `og:image` value in `build.sh` updated. This improves social share appearance but does not block any other work.
+- `og:image` — `images/GATHER.jpg` (branded social share image)
 
 ---
 
@@ -193,15 +191,18 @@ Every service page H1 is the bare service name with no location or keyword conte
 
 ---
 
-### ⬜ 9. Body Copy — Broaden Beyond Weddings
-**Not started**
+### ✅ 9. Body Copy — Broaden Beyond Weddings
+**Completed 2026-02-26 — client review pending**
 
-Several service descriptions read as wedding-only, causing non-wedding searchers to bounce. The fix is adding inclusive language — not removing wedding references, which remain an important market.
+Several service descriptions read as wedding-only, causing non-wedding searchers to bounce. v2 preview pages were created for client review. The originals are untouched; once the client approves, the v2 files replace them.
 
-Pages needing updates:
-- **Homepage service cards** — "Full Wedding Planning package is for couples" → add corporate/private event language
-- **Catering page** — "Keep your bridal party, family, and vendors energized" → reference all event types
-- **Mobile Bartending page** — "ensuring your wedding bar runs smoothly" → include corporate events and parties
+| Page | Preview URL | Key Changes |
+|------|-------------|-------------|
+| Homepage | `/index-v2.html` | Service card descriptions for Full Planning, Day-Of, Bartending, Catering broadened |
+| Full Planning | `/services/full-planning-v2.html` | "couples/wedding" → "anyone/event"; sections renamed Pre-Event and Event Day |
+| Day-Of Coordinating | `/services/day-of-coordinating-v2.html` | "wedding" → "event" throughout; "first look" → "first arrival" |
+| Catering | `/services/catering-v2.html` | "wedding" → "wedding, corporate gathering, or private celebration" |
+| Mobile Bartending | `/services/mobile-bartending-v2.html` | Broadened to include corporate events and private parties |
 
 ---
 
@@ -262,5 +263,5 @@ Future scope — not launch-blocking.
 
 - [ ] **Phone number** — needed for NAP consistency in footer and Google Business Profile
 - [ ] **Google Business Profile** — does one exist? Is it claimed and verified?
-- [ ] **OG image** — needs to be designed (1200×630px, Gather logo on brand background) before Open Graph tags can be implemented
+- [x] **OG image** — `images/GATHER.jpg` added and wired up in `build.sh`
 - [ ] **Service area clarification** — do they serve outside Cincinnati/Columbus metro? Statewide?
