@@ -17,6 +17,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PARTIALS="$SCRIPT_DIR/src/_partials"
 OUT_DIR="$SCRIPT_DIR/publish"
+BUILD_TS="$(date +%s)"
 
 # ── Reset publish/ ────────────────────────────────────────────────────────────
 
@@ -57,10 +58,10 @@ build_page() {
     cat "$PARTIALS/head-top.html"
     printf '  <title>%s</title>\n' "$title"
     printf '  <meta name="description" content="%s">\n' "$desc"
-    sed "s|{{PATH}}|${path_prefix}|g" "$PARTIALS/head-bottom.html"
+    sed -e "s|{{PATH}}|${path_prefix}|g" -e "s|{{BUILD}}|${BUILD_TS}|g" "$PARTIALS/head-bottom.html"
     sed "s|{{PATH}}|${path_prefix}|g" "$PARTIALS/body-open.html"
     printf '%s\n' "$body"
-    sed "s|{{PATH}}|${path_prefix}|g" "$close"
+    sed -e "s|{{PATH}}|${path_prefix}|g" -e "s|{{BUILD}}|${BUILD_TS}|g" "$close"
   } > "$dest"
 
   echo "  $dest"
