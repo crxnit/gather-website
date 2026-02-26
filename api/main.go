@@ -39,9 +39,25 @@ const (
 	listenAddr        = ":8000"
 )
 
-var allowedOrigins = map[string]bool{
-	"https://gathercateringandevents.com": true,
-	"https://gathercafeandevents.com":     true,
+var allowedDomains = []string{
+	"gathercateringandevents.com",
+	"gathercafeandevents.com",
+}
+
+func isAllowedOrigin(origin string) bool {
+	// Strip scheme (https:// or http://)
+	host := strings.TrimPrefix(origin, "https://")
+	host = strings.TrimPrefix(host, "http://")
+	// Strip port if present
+	if i := strings.IndexByte(host, ':'); i != -1 {
+		host = host[:i]
+	}
+	for _, domain := range allowedDomains {
+		if host == domain || strings.HasSuffix(host, "."+domain) {
+			return true
+		}
+	}
+	return false
 }
 
 // ── Request model ─────────────────────────────────────────────────────────────
@@ -157,7 +173,7 @@ func main() {
 func corsMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		origin := r.Header.Get("Origin")
-		if allowedOrigins[origin] {
+		if isAllowedOrigin(origin) {
 			w.Header().Set("Access-Control-Allow-Origin", origin)
 			w.Header().Set("Vary", "Origin")
 		}
