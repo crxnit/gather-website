@@ -31,7 +31,9 @@
     { label: 'About Us', href: 'about.html' },
     { label: 'Testimonials', href: 'testimonials.html' },
     { label: 'FAQs', href: 'faq.html' },
-    { label: 'Policies', href: 'policies.html' }
+    { label: 'Policies', href: 'policies.html' },
+    { label: 'Terms of Use', href: 'terms-of-use.html' },
+    { label: 'Privacy Policy', href: 'privacy-policy.html' }
   ];
 
   // Single source of truth for testimonials — rendered on index.html and testimonials.html.

@@ -109,7 +109,7 @@ TODAY="$(date +%Y-%m-%d)"
   printf '<?xml version="1.0" encoding="UTF-8"?>\n'
   printf '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
   printf '  <url><loc>%s/</loc><lastmod>%s</lastmod><priority>1.0</priority></url>\n' "$BASE_URL" "$TODAY"
-  for page in about faq inquiry policies testimonials; do
+  for page in about faq inquiry policies privacy-policy terms-of-use testimonials; do
     printf '  <url><loc>%s/%s.html</loc><lastmod>%s</lastmod><priority>0.8</priority></url>\n' "$BASE_URL" "$page" "$TODAY"
   done
   for service in catering-staffing catering day-of-coordinating full-planning mobile-bartending mobile-food-cart; do
