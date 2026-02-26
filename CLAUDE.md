@@ -25,7 +25,7 @@ HTML pages are assembled from shared partials + per-page source files by `build.
 | Directory | Purpose |
 |-----------|---------|
 | `src/_partials/` | Shared HTML fragments (`<head>`, body open/close, scripts) |
-| `src/pages/` | Source files for root-level pages (index, about, inquiry, testimonials, policies) |
+| `src/pages/` | Source files for root-level pages (index, about, inquiry, testimonials, policies, terms-of-use, privacy-policy) |
 | `src/services/` | Source files for the 6 service detail pages |
 | `publish/` | Build output — generated HTML pages (root pages + `services/` subdir) |
 | `html-v1/` | Pre-build-system HTML snapshot (permanent reference) |
@@ -113,6 +113,8 @@ Inspired by [togetherandco.com](https://togetherandco.com). Sections in order:
 - Testimonials
 - FAQs / Common Questions (future version — launch without)
 - Policies
+- Terms of Use
+- Privacy Policy
 
 ### Dynamic Functionality
 - **Inquiry Form**: Generic (not wedding-focused), with service checkboxes, write-in budget field, open commentary field. Sends confirmation to submitter and notification to catering@gathercateringandevents.com. Reference: gather.jjocapps.com
