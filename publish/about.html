@@ -19,12 +19,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:wght@400;500;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/reset.css?v=1772144066">
-  <link rel="stylesheet" href="css/variables.css?v=1772144066">
-  <link rel="stylesheet" href="css/base.css?v=1772144066">
-  <link rel="stylesheet" href="css/layout.css?v=1772144066">
-  <link rel="stylesheet" href="css/components.css?v=1772144066">
-  <link rel="stylesheet" href="css/pages.css?v=1772144066">
+  <link rel="stylesheet" href="css/reset.css?v=1772144211">
+  <link rel="stylesheet" href="css/variables.css?v=1772144211">
+  <link rel="stylesheet" href="css/base.css?v=1772144211">
+  <link rel="stylesheet" href="css/layout.css?v=1772144211">
+  <link rel="stylesheet" href="css/components.css?v=1772144211">
+  <link rel="stylesheet" href="css/pages.css?v=1772144211">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -55,15 +55,22 @@
       <div class="container">
         <div class="about-hero">
           <div class="about-hero__image reveal reveal--slide-right">
-            <img
-              class="img-cover"
-              srcset="images/sm/team-photo.jpg 400w, images/md/team-photo.jpg 800w, images/lg/team-photo.jpg 1200w"
-              sizes="(max-width: 767px) 100vw, 40vw"
-              src="images/md/team-photo.jpg"
-              alt="The Gather Catering and Events team"
-              width="800"
-              height="600"
-            >
+            <picture>
+              <source
+                type="image/webp"
+                srcset="images/sm/team-photo.webp 400w, images/md/team-photo.webp 800w, images/lg/team-photo.webp 1200w"
+                sizes="(max-width: 767px) 100vw, 40vw"
+              >
+              <img
+                class="img-cover"
+                srcset="images/sm/team-photo.jpg 400w, images/md/team-photo.jpg 800w, images/lg/team-photo.jpg 1200w"
+                sizes="(max-width: 767px) 100vw, 40vw"
+                src="images/md/team-photo.jpg"
+                alt="The Gather Catering and Events team"
+                width="800"
+                height="600"
+              >
+            </picture>
           </div>
           <div class="about-hero__content reveal reveal--slide-left">
             <h1>About Us</h1>
@@ -84,8 +91,8 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="js/components.js?v=1772144066"></script>
-  <script src="js/nav.js?v=1772144066"></script>
-  <script src="js/scroll-reveal.js?v=1772144066"></script>
+  <script src="js/components.js?v=1772144211"></script>
+  <script src="js/nav.js?v=1772144211"></script>
+  <script src="js/scroll-reveal.js?v=1772144211"></script>
 </body>
 </html>

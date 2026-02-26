@@ -5,15 +5,22 @@
       <div class="container">
         <div class="about-hero">
           <div class="about-hero__image reveal reveal--slide-right">
-            <img
-              class="img-cover"
-              srcset="images/sm/team-photo.jpg 400w, images/md/team-photo.jpg 800w, images/lg/team-photo.jpg 1200w"
-              sizes="(max-width: 767px) 100vw, 40vw"
-              src="images/md/team-photo.jpg"
-              alt="The Gather Catering and Events team"
-              width="800"
-              height="600"
-            >
+            <picture>
+              <source
+                type="image/webp"
+                srcset="images/sm/team-photo.webp 400w, images/md/team-photo.webp 800w, images/lg/team-photo.webp 1200w"
+                sizes="(max-width: 767px) 100vw, 40vw"
+              >
+              <img
+                class="img-cover"
+                srcset="images/sm/team-photo.jpg 400w, images/md/team-photo.jpg 800w, images/lg/team-photo.jpg 1200w"
+                sizes="(max-width: 767px) 100vw, 40vw"
+                src="images/md/team-photo.jpg"
+                alt="The Gather Catering and Events team"
+                width="800"
+                height="600"
+              >
+            </picture>
           </div>
           <div class="about-hero__content reveal reveal--slide-left">
             <h1>About Us</h1>

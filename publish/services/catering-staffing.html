@@ -19,12 +19,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:wght@400;500;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/reset.css?v=1772144066">
-  <link rel="stylesheet" href="../css/variables.css?v=1772144066">
-  <link rel="stylesheet" href="../css/base.css?v=1772144066">
-  <link rel="stylesheet" href="../css/layout.css?v=1772144066">
-  <link rel="stylesheet" href="../css/components.css?v=1772144066">
-  <link rel="stylesheet" href="../css/pages.css?v=1772144066">
+  <link rel="stylesheet" href="../css/reset.css?v=1772144211">
+  <link rel="stylesheet" href="../css/variables.css?v=1772144211">
+  <link rel="stylesheet" href="../css/base.css?v=1772144211">
+  <link rel="stylesheet" href="../css/layout.css?v=1772144211">
+  <link rel="stylesheet" href="../css/components.css?v=1772144211">
+  <link rel="stylesheet" href="../css/pages.css?v=1772144211">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -80,15 +80,22 @@
     <section class="service-detail">
       <div class="container">
         <div class="service-detail__hero reveal reveal--fade">
-          <img
-            srcset="../images/sm/catering-staffing.jpg 400w, ../images/md/catering-staffing.jpg 612w, ../images/lg/catering-staffing.jpg 1400w"
-            sizes="100vw"
-            src="../images/lg/catering-staffing.jpg"
-            class="img-cover"
-            alt="Professional catering staff serving guests at a Gather event"
-            width="612"
-            height="408"
-          >
+          <picture>
+            <source
+              type="image/webp"
+              srcset="../images/sm/catering-staffing.webp 400w, ../images/md/catering-staffing.webp 612w, ../images/lg/catering-staffing.webp 1400w"
+              sizes="100vw"
+            >
+            <img
+              srcset="../images/sm/catering-staffing.jpg 400w, ../images/md/catering-staffing.jpg 612w, ../images/lg/catering-staffing.jpg 1400w"
+              sizes="100vw"
+              src="../images/lg/catering-staffing.jpg"
+              class="img-cover"
+              alt="Professional catering staff serving guests at a Gather event"
+              width="612"
+              height="408"
+            >
+          </picture>
         </div>
 
         <h1 class="service-detail__title">Catering Staffing</h1>
@@ -124,8 +131,8 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="../js/components.js?v=1772144066"></script>
-  <script src="../js/nav.js?v=1772144066"></script>
-  <script src="../js/scroll-reveal.js?v=1772144066"></script>
+  <script src="../js/components.js?v=1772144211"></script>
+  <script src="../js/nav.js?v=1772144211"></script>
+  <script src="../js/scroll-reveal.js?v=1772144211"></script>
 </body>
 </html>

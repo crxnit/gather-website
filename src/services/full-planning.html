@@ -26,15 +26,22 @@
     <section class="service-detail">
       <div class="container">
         <div class="service-detail__hero reveal reveal--fade">
-          <img
-            srcset="../images/sm/full-planning.jpg 400w, ../images/md/full-planning.jpg 612w, ../images/lg/full-planning.jpg 1400w"
-            sizes="100vw"
-            src="../images/lg/full-planning.jpg"
-            class="img-cover"
-            alt="Elegantly lit wedding reception, full event planning by Gather"
-            width="282"
-            height="179"
-          >
+          <picture>
+            <source
+              type="image/webp"
+              srcset="../images/sm/full-planning.webp 400w, ../images/md/full-planning.webp 612w, ../images/lg/full-planning.webp 1400w"
+              sizes="100vw"
+            >
+            <img
+              srcset="../images/sm/full-planning.jpg 400w, ../images/md/full-planning.jpg 612w, ../images/lg/full-planning.jpg 1400w"
+              sizes="100vw"
+              src="../images/lg/full-planning.jpg"
+              class="img-cover"
+              alt="Elegantly lit wedding reception, full event planning by Gather"
+              width="282"
+              height="179"
+            >
+          </picture>
         </div>
 
         <h1 class="service-detail__title">Full Planning</h1>

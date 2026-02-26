@@ -26,15 +26,22 @@
     <section class="service-detail">
       <div class="container">
         <div class="service-detail__hero reveal reveal--fade">
-          <img
-            srcset="../images/sm/food-cart-7.jpg 400w, ../images/md/food-cart-7.jpg 612w, ../images/lg/food-cart-7.jpg 1400w"
-            sizes="100vw"
-            src="../images/lg/food-cart-7.jpg"
-            class="img-cover"
-            alt="Assorted pastries and desserts at a Gather mobile food cart"
-            width="1400"
-            height="932"
-          >
+          <picture>
+            <source
+              type="image/webp"
+              srcset="../images/sm/food-cart-7.webp 400w, ../images/md/food-cart-7.webp 612w, ../images/lg/food-cart-7.webp 1400w"
+              sizes="100vw"
+            >
+            <img
+              srcset="../images/sm/food-cart-7.jpg 400w, ../images/md/food-cart-7.jpg 612w, ../images/lg/food-cart-7.jpg 1400w"
+              sizes="100vw"
+              src="../images/lg/food-cart-7.jpg"
+              class="img-cover"
+              alt="Assorted pastries and desserts at a Gather mobile food cart"
+              width="1400"
+              height="932"
+            >
+          </picture>
         </div>
 
         <h1 class="service-detail__title">Mobile Food Cart</h1>

@@ -30,15 +30,22 @@
     <section class="service-detail">
       <div class="container">
         <div class="service-detail__hero reveal reveal--fade">
-          <img
-            srcset="../images/sm/catering-staffing.jpg 400w, ../images/md/catering-staffing.jpg 612w, ../images/lg/catering-staffing.jpg 1400w"
-            sizes="100vw"
-            src="../images/lg/catering-staffing.jpg"
-            class="img-cover"
-            alt="Professional catering staff serving guests at a Gather event"
-            width="612"
-            height="408"
-          >
+          <picture>
+            <source
+              type="image/webp"
+              srcset="../images/sm/catering-staffing.webp 400w, ../images/md/catering-staffing.webp 612w, ../images/lg/catering-staffing.webp 1400w"
+              sizes="100vw"
+            >
+            <img
+              srcset="../images/sm/catering-staffing.jpg 400w, ../images/md/catering-staffing.jpg 612w, ../images/lg/catering-staffing.jpg 1400w"
+              sizes="100vw"
+              src="../images/lg/catering-staffing.jpg"
+              class="img-cover"
+              alt="Professional catering staff serving guests at a Gather event"
+              width="612"
+              height="408"
+            >
+          </picture>
         </div>
 
         <h1 class="service-detail__title">Catering Staffing</h1>
