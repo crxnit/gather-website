@@ -107,7 +107,7 @@ Inspired by [togetherandco.com](https://togetherandco.com). Sections in order:
 
 1. **Full-width hero** (`hero-full`) — compact (35–45vh) background image (`display-table-closeup.jpg`) with dark gradient overlay, centered logo, tagline, heading, and description (no CTA button)
 2. **Services grid** — 6 service cards (image + title + description + "Learn More" link) in a centered flexbox layout (1→2→3 columns)
-3. **Testimonials** (`section--alt`) — 3 testimonial cards with star ratings in a 3-column grid, plus "Read More Reviews" link
+3. **Testimonials** (`section--alt`) — 2 real review cards (Amanda S., Deb P.) with star ratings, plus "Read More Reviews" link
 4. **CTA** — centered heading + "Request a Quote" button
 
 ## Site Structure
@@ -124,10 +124,10 @@ Inspired by [togetherandco.com](https://togetherandco.com). Sections in order:
 - About Us
 - Photo Gallery (future version)
 - Testimonials
-- FAQs / Common Questions (future version — launch without)
-- Policies
-- Terms of Use
-- Privacy Policy
+- FAQs / Common Questions
+- Policies (client-provided copy, no em dashes)
+- Terms of Use (footer-only link, not in nav)
+- Privacy Policy (footer-only link, not in nav)
 
 ### Dynamic Functionality
 - **Inquiry Form**: Generic (not wedding-focused), with service checkboxes, write-in budget field, open commentary field. Sends confirmation to submitter and notification to catering@gathercateringandevents.com. Reference: gather.jjocapps.com
@@ -157,7 +157,7 @@ Inspired by [togetherandco.com](https://togetherandco.com). Sections in order:
 - **Hero section**: Compact full-width hero with background image (left-focused), logo, heading, and description. No CTA button.
 - **Service cards**: Centered flexbox grid — incomplete last row is centered
 - **Service detail pages**: All headings and body text centered; bullet lists centered as a block
-- **Footer**: Fully centered layout with two vendor badges (The Knot, WeddingWire); Terms of Use and Privacy Policy links appear inline next to the copyright notice (not in the main nav or footer link grid)
+- **Footer**: Fully centered layout with two vendor badges (The Knot, WeddingWire); Terms of Use and Privacy Policy links on a separate line below the copyright notice (not in the main nav or footer link grid)
 - **Caching**: Aggressively disabled for development — Nginx disables ETags, If-Modified-Since, and Last-Modified; sends `no-cache, no-store, must-revalidate` on all HTML/CSS/JS; `build.sh` appends `?v=TIMESTAMP` to every CSS/JS reference for cache-busting (see `deploy/nginx.conf`)
 
 ### Future Versions
