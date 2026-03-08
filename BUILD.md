@@ -37,10 +37,10 @@ src/
 ├── pages/
 │   ├── index.html              Homepage
 │   ├── about.html              About Us
-│   ├── faq.html                FAQs
+│   ├── faq.html                FAQs (temporarily skipped by build)
 │   ├── inquiry.html            Inquiry form (uses body-close-form.html)
 │   ├── testimonials.html       Testimonials
-│   └── policies.html           Policies
+│   └── policies.html           Policies (temporarily skipped by build)
 └── services/
     ├── full-planning.html
     ├── day-of-coordinating.html

@@ -25,7 +25,7 @@ HTML pages are assembled from shared partials + per-page source files by `build.
 | Directory | Purpose |
 |-----------|---------|
 | `src/_partials/` | Shared HTML fragments (`<head>`, body open/close, scripts) |
-| `src/pages/` | Source files for root-level pages (index, about, inquiry, testimonials, policies, terms-of-use, privacy-policy) |
+| `src/pages/` | Source files for root-level pages (index, about, inquiry, testimonials, terms-of-use, privacy-policy); faq.html and policies.html exist but are temporarily excluded from the build |
 | `src/services/` | Source files for the 6 service detail pages |
 | `publish/` | Build output — generated HTML pages (root pages + `services/` subdir) |
 | `html-v1/` | Pre-build-system HTML snapshot (permanent reference) |
@@ -106,26 +106,24 @@ To re-optimize or add images: place source in `images/originals/`, create sized 
 Inspired by [togetherandco.com](https://togetherandco.com). Sections in order:
 
 1. **Full-width hero** (`hero-full`) — compact (35–45vh) background image (`display-table-closeup.jpg`) with dark gradient overlay, centered logo, tagline, heading, and description (no CTA button)
-2. **Services grid** — 6 service cards (image + title + description + "Learn More" link) in a centered flexbox layout (1→2→3 columns)
+2. **Services grid** — 6 service cards (image + title + description + "Learn More" link) in a centered flexbox layout (1→2→3 columns). Card order: Catering, Mobile Food Cart, Catering Staffing, Mobile Bartending, Day-of Coordinating, Full Planning
 3. **Testimonials** (`section--alt`) — 2 real review cards (Amanda S., Deb P.) with star ratings, plus "Read More Reviews" link
 4. **CTA** — centered heading + "Request a Quote" button
 
 ## Site Structure
 
 ### Service Pages (each with its own dedicated page, linked from homepage with image + brief description)
-- Full Planning
-- "Day Of" Coordinating
-- Mobile Bartending
 - Catering
-- Catering Staffing
 - Mobile Food Cart *(Coming Soon — pricing card shows "Coming Soon"; image has a semi-transparent overlay with "Coming Soon" text in brand style)*
+- Catering Staffing
+- Mobile Bartending
+- "Day Of" Coordinating
+- Full Planning
 
 ### Other Pages
 - About Us
 - Photo Gallery (future version)
 - Testimonials
-- FAQs / Common Questions
-- Policies (client-provided copy, no em dashes)
 - Terms of Use (footer-only link, not in nav)
 - Privacy Policy (footer-only link, not in nav)
 
@@ -162,6 +160,7 @@ Inspired by [togetherandco.com](https://togetherandco.com). Sections in order:
 
 ### Future Versions
 - Social media links
-- FAQs page
+- FAQs page (source exists at `src/pages/faq.html`, temporarily removed from build/nav/sitemap)
+- Policies page (source exists at `src/pages/policies.html`, temporarily removed from build/nav/sitemap)
 - Photo Gallery
 - Pop-ups
