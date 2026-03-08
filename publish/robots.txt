@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gathercateringandevents.com/sitemap.xml
+Sitemap: https://preview-cms.gathercateringandevents.com/sitemap.xml
