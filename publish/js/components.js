@@ -85,6 +85,14 @@
           PAGE_LINKS.map(function (link) {
             return '<li><a href="' + url(link.href) + '">' + link.label + '</a></li>';
           }).join('') +
+          '<li class="nav-dropdown">' +
+            '<button class="nav-dropdown-toggle" aria-expanded="false">' +
+              'Contact Us <span class="arrow" aria-hidden="true">&#9660;</span>' +
+            '</button>' +
+            '<ul class="nav-dropdown-menu">' +
+              '<li><a href="mailto:info@gathercateringandevents.com" style="text-align:center;display:block;">Send us an email!<br><span style="font-size:0.8em;">(info@gathercateringandevents.com)</span></a></li>' +
+            '</ul>' +
+          '</li>' +
           '<li><a href="' + url('inquiry.html') + '" class="btn btn--primary nav-cta">Get a Quote</a></li>' +
         '</ul>' +
       '</nav>' +
