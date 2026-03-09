@@ -83,7 +83,7 @@ build_page() {
     sed "s|{{PATH}}|${path_prefix}|g" "$PARTIALS/body-open.html"
     printf '%s\n' "$body"
     sed -e "s|{{PATH}}|${path_prefix}|g" -e "s|{{BUILD}}|${BUILD_TS}|g" "$close"
-  } > "$dest"
+  } | sed -E "s/\.(jpg|jpeg|webp|png)([\" ])/.\1?v=${BUILD_TS}\2/g" > "$dest"
 
   echo "  $dest"
 }
