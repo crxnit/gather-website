@@ -35,6 +35,17 @@ http:
       middlewares:
         - gather-redirect-to-primary
 
+    # API subdomain
+    gather-api:
+      rule: "Host(`api.gathercateringandevents.com`)"
+      entryPoints:
+        - websecure
+      service: gather-api
+      middlewares:
+        - gather-hsts
+      tls:
+        certResolver: le
+
   # ── Middlewares ───────────────────────────────────────────────────
 
   middlewares:
@@ -62,3 +73,8 @@ http:
       loadBalancer:
         servers:
           - url: "http://nginx:80"
+
+    gather-api:
+      loadBalancer:
+        servers:
+          - url: "http://gather-api:8000"
