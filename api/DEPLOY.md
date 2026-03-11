@@ -35,23 +35,16 @@ curl -X POST http://localhost:8000/submit \
 
 ## Traefik Integration
 
-The production stack uses Traefik as a reverse proxy. Add labels to expose the API through Traefik:
+The production stack uses Traefik as a reverse proxy. The API is routed via a dedicated subdomain (`api.gathercateringandevents.com`) defined in `deploy/traefik-gather.yml`. The container must be on the Traefik network:
 
 ```bash
 docker run -d --name gather-api \
-  --network traefik-net \
+  --network traefik \
   --restart unless-stopped \
-  --label "traefik.enable=true" \
-  --label "traefik.http.routers.gather-api.rule=Host(\`gathercateringandevents.com\`) && PathPrefix(\`/api\`)" \
-  --label "traefik.http.routers.gather-api.entrypoints=websecure" \
-  --label "traefik.http.routers.gather-api.tls.certresolver=letsencrypt" \
-  --label "traefik.http.middlewares.gather-api-strip.stripprefix.prefixes=/api" \
-  --label "traefik.http.routers.gather-api.middlewares=gather-api-strip" \
-  --label "traefik.http.services.gather-api.loadbalancer.server.port=8000" \
   gather-api
 ```
 
-This routes `https://gathercateringandevents.com/api/*` to the container on port 8000, stripping the `/api` prefix so the Go handler sees `/submit`.
+Traefik routes `https://api.gathercateringandevents.com/*` to the container on port 8000. No path stripping is needed — the Go handler receives `/submit` directly.
 
 ## Logs
 

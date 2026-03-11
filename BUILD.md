@@ -37,6 +37,7 @@ src/
 ├── pages/
 │   ├── index.html              Homepage
 │   ├── about.html              About Us
+│   ├── 404.html                Custom 404 error page
 │   ├── faq.html                FAQs (temporarily skipped by build)
 │   ├── inquiry.html            Inquiry form (uses body-close-form.html)
 │   ├── testimonials.html       Testimonials
