@@ -11,7 +11,7 @@ http:
       middlewares:
         - gather-hsts
       tls:
-        certResolver: letsencrypt
+        certResolver: le
 
     # Strip www from primary domain
     gather-www:
@@ -22,7 +22,7 @@ http:
       middlewares:
         - gather-strip-www
       tls:
-        certResolver: letsencrypt
+        certResolver: le
 
     # Redirect alternate domain → primary
     gather-redirect:
@@ -31,7 +31,7 @@ http:
         - websecure
       service: noop@internal
       tls:
-        certResolver: letsencrypt
+        certResolver: le
       middlewares:
         - gather-redirect-to-primary
 
