@@ -2,12 +2,25 @@ http:
   # ── Routers ──────────────────────────────────────────────────────
 
   routers:
-    # Primary domain
+    # Primary domain (non-www)
     gather-main:
-      rule: "Host(`gathercateringandevents.com`) || Host(`www.gathercateringandevents.com`)"
+      rule: "Host(`gathercateringandevents.com`)"
       entryPoints:
         - websecure
       service: gather-web
+      middlewares:
+        - gather-hsts
+      tls:
+        certResolver: letsencrypt
+
+    # Strip www from primary domain
+    gather-www:
+      rule: "Host(`www.gathercateringandevents.com`)"
+      entryPoints:
+        - websecure
+      service: noop@internal
+      middlewares:
+        - gather-strip-www
       tls:
         certResolver: letsencrypt
 
@@ -45,12 +58,16 @@ http:
         scheme: https
         permanent: true
 
-    # Strip www from primary domain (optional — uncomment if desired)
-    # gather-strip-www:
-    #   redirectRegex:
-    #     regex: "^https?://www\\.gathercateringandevents\\.com(.*)"
-    #     replacement: "https://gathercateringandevents.com${1}"
-    #     permanent: true
+    gather-strip-www:
+      redirectRegex:
+        regex: "^https?://www\\.gathercateringandevents\\.com(.*)"
+        replacement: "https://gathercateringandevents.com${1}"
+        permanent: true
+
+    gather-hsts:
+      headers:
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
 
   # ── Services ─────────────────────────────────────────────────────
 
