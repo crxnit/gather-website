@@ -126,7 +126,7 @@
 
 .service-card__desc {
   font-size: var(--text-sm);
-  line-height: 1.6;
+  line-height: var(--line-height-relaxed);
   margin-bottom: var(--space-md);
   flex-grow: 1;
 }
@@ -190,7 +190,6 @@
   font-size: var(--text-lg);
   margin-bottom: var(--space-sm);
 }
-
 
 .testimonial-card__event {
   font-size: var(--text-xs);

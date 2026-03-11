@@ -126,4 +126,4 @@ echo "  $OUT_DIR/sitemap.xml"
 sed "s|{{BASE_URL}}|${BASE_URL}|g" "$SCRIPT_DIR/robots.txt" > "$OUT_DIR/robots.txt"
 echo "  $OUT_DIR/robots.txt"
 
-echo "Done. Built $(ls "$SCRIPT_DIR"/src/pages/*.html "$SCRIPT_DIR"/src/services/*.html 2>/dev/null | wc -l | tr -d ' ') pages."
+echo "Done. Built $(ls "$OUT_DIR"/*.html "$OUT_DIR"/services/*.html 2>/dev/null | wc -l | tr -d ' ') pages."

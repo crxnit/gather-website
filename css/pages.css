@@ -134,12 +134,7 @@
   }
 
   .hero-full__logo {
-    width: 150px;
     margin-bottom: var(--space-md);
-  }
-
-  .hero-full__tagline {
-    font-size: var(--text-lg);
   }
 
   .hero-full__desc {

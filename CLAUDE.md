@@ -65,17 +65,19 @@ The Go API allows cross-origin requests from both domains and all their subdomai
 The Go API uses `net/textproto` (NOT `net/smtp`) to drive the SMTP conversation. Go's `net/smtp` package hardcodes `EHLO localhost`, which Google's SMTP relay rejects with a 421. Using `net/textproto` lets us send `EHLO gathercateringandevents.com` and control every step of the protocol. See `api/SMTP.md` for full details and debugging history.
 
 ### Image Optimization
-All served images use `<picture>` elements with WebP `<source>` and JPEG `<img>` fallback. Three size variants exist per image (`images/sm/`, `images/md/`, `images/lg/`) selected via `srcset`. Large images are capped at 1400px wide, compressed as progressive JPEG at quality 82, and converted to WebP at quality 82.
+All served images use `<picture>` elements with WebP `<source>` and JPEG `<img>` fallback. Three size variants exist per image (`images/sm/`, `images/md/`, `images/lg/`) selected via `srcset`. All images are standardized to a **4:3 (2:1.5) aspect ratio** with a maximum width of **1200px**, compressed as progressive JPEG at quality 82, and converted to WebP at quality 82.
 
 | Directory | Purpose |
 |-----------|---------|
-| `images/sm/` | Small (400px wide) — mobile |
-| `images/md/` | Medium (612–800px wide) — tablet / service cards |
-| `images/lg/` | Large (1400px wide) — desktop / hero |
+| `images/sm/` | Small (400×300) — mobile |
+| `images/md/` | Medium (800×600) — tablet / service cards |
+| `images/lg/` | Large (1200×900) — desktop / hero |
 | `images/*/originals/` | Pre-optimization JPEG backups (not served) |
 | `images/originals/` | Full-resolution source images (not served) |
 
-To re-optimize or add images: place source in `images/originals/`, create sized JPEGs in `sm/md/lg/`, then generate `.webp` alongside each `.jpg` using Pillow (quality 82, method 6). The `build.sh` copies the entire `images/` directory into `publish/`.
+Some images have page-specific crops from the same source (e.g., `catering-card.jpg` is a tighter sandwich-focused crop used only on the homepage service card, while `catering.jpg` is used on the catering detail page). Service detail pages may use `object-position` CSS to fine-tune which part of the image is visible within the hero area.
+
+To re-optimize or add images: place source in `images/originals/`, center-crop to 4:3 aspect ratio, create sized JPEGs in `sm/md/lg/`, then generate `.webp` alongside each `.jpg` using Pillow (quality 82, method 6). The `build.sh` copies the entire `images/` directory into `publish/`.
 
 ### Deployment
 - **Go API**: Docker container — `docker build -t gather-api ./api && docker run -d --name gather-api -p 8000:8000 gather-api`. See `api/DEPLOY.md` for full instructions including Traefik integration.
@@ -114,7 +116,7 @@ Inspired by [togetherandco.com](https://togetherandco.com). Sections in order:
 
 ### Service Pages (each with its own dedicated page, linked from homepage with image + brief description)
 - Catering
-- Mobile Food Cart *(Coming Soon — pricing card shows "Coming Soon"; image has a semi-transparent overlay with "Coming Soon" text in brand style)*
+- Mobile Food Cart
 - Catering Staffing
 - Mobile Bartending
 - "Day Of" Coordinating
