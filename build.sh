@@ -115,6 +115,7 @@ done
 if [ -d "$SCRIPT_DIR/gather-menus/pdfs" ]; then
   mkdir -p "$OUT_DIR/menus/pdfs"
   cp "$SCRIPT_DIR/gather-menus/pdfs/"*.pdf "$OUT_DIR/menus/pdfs/" 2>/dev/null || true
+  echo "  Copied $(ls "$OUT_DIR/menus/pdfs/"*.pdf 2>/dev/null | wc -l | tr -d ' ') menu PDFs to $OUT_DIR/menus/pdfs/"
 fi
 
 # ── Generate sitemap.xml ──────────────────────────────────────────────────────

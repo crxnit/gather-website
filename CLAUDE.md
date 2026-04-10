@@ -27,14 +27,16 @@ HTML pages are assembled from shared partials + per-page source files by `build.
 | `src/_partials/` | Shared HTML fragments (`<head>`, body open/close, scripts) |
 | `src/pages/` | Source files for root-level pages (index, about, inquiry, testimonials, terms-of-use, privacy-policy, 404); faq.html and policies.html exist but are temporarily excluded from the build |
 | `src/services/` | Source files for the 6 service detail pages |
-| `publish/` | Build output — generated HTML pages (root pages + `services/` subdir) |
+| `src/menus/` | Source files for the 7 menu pages; `print/` subdir has standalone print-optimized HTML (not built by build.sh) |
+| `gather-menus/pdfs/` | Source PDFs committed to repo; copied into `publish/menus/pdfs/` by build.sh |
+| `publish/` | Build output — generated HTML pages (root pages + `services/` + `menus/` subdirs) |
 | `html-v1/` | Pre-build-system HTML snapshot (permanent reference) |
 
 **Workflow:** Edit files in `src/`, run `./build.sh`, generated HTML appears in `publish/`. Source files use comment front matter (`<!-- TITLE: ... -->`, `<!-- DESC: ... -->`). Partials use two placeholders:
 
 | Placeholder | Replaced with | Purpose |
 |-------------|---------------|---------|
-| `{{PATH}}` | `""` (root) or `"../"` (services) | Relative path prefix for CSS/JS/image references |
+| `{{PATH}}` | `""` (root) or `"../"` (services/menus) | Relative path prefix for CSS/JS/image references |
 | `{{BUILD}}` | Unix timestamp (`date +%s`) | Cache-busting query string appended to all CSS and JS URLs |
 
 Every build produces unique URLs (e.g., `css/base.css?v=1772127832`), forcing browsers to fetch fresh assets.
@@ -126,6 +128,15 @@ Inspired by [togetherandco.com](https://togetherandco.com). Sections in order:
 - "Day Of" Coordinating
 - Full Planning
 
+### Menu Pages (accessible via Menus nav dropdown, each with a "Download PDF" button at top and CTA at bottom)
+- Individual Meal Menu
+- Breakfast Menu
+- Lunch Menu
+- Small Bites & Stations
+- Breakfast Cart
+- Mac Cart
+- Smash Burger Cart
+
 ### Other Pages
 - About Us
 - Photo Gallery (future version)
@@ -145,13 +156,13 @@ Inspired by [togetherandco.com](https://togetherandco.com). Sections in order:
 | `css/base.css` | Typography, global styles, scroll-reveal animations |
 | `css/layout.css` | Container, header, nav, grid utilities, footer |
 | `css/components.css` | Buttons, cards, forms, testimonial cards |
-| `css/pages.css` | Page-specific styles (hero variants, service detail, about, inquiry) |
+| `css/pages.css` | Page-specific styles (hero variants, service detail, about, inquiry, menu pages) |
 
 ### JS Architecture
 | File | Purpose |
 |------|---------|
-| `js/components.js` | Injects shared header/footer HTML, testimonials, CTAs; highlights active nav link; exposes `SERVICE_LINKS` via `window.GATHER_SITE` |
-| `js/nav.js` | Hamburger menu toggle, services dropdown |
+| `js/components.js` | Injects shared header/footer HTML, testimonials, CTAs; highlights active nav link; exposes `SERVICE_LINKS` and `MENU_LINKS` via `window.GATHER_SITE`; builds Services and Menus nav dropdowns |
+| `js/nav.js` | Hamburger menu toggle, services/menus dropdowns |
 | `js/scroll-reveal.js` | IntersectionObserver-based reveal animations |
 | `js/form.js` | Inquiry form validation, service checkbox generation, anti-spam fields (honeypot + elapsed time), submission to Go API |
 | `js/config.js` | Deployment-specific config (`.gitignored`) |
