@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smash Burger Cart Menu | Gather</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #fff; color: #2C3E50; font-family: 'Source Sans 3', sans-serif; font-size: 13px; line-height: 1.5; padding: 32px; }
+    .header-card { background: #2C3E50; border-radius: 10px; padding: 32px 40px 24px; text-align: center; margin-bottom: 36px; }
+    .brand-wordmark { font-family: 'Abril Fatface', serif; font-size: 72px; color: #F9E3B4; letter-spacing: 0.06em; line-height: 1; margin-bottom: 6px; }
+    .brand-tagline { font-family: 'Poppins', sans-serif; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #C9D6EA; opacity: 0.8; }
+    .header-rule { width: 50px; height: 1px; background: rgba(249,227,180,0.5); margin: 10px auto; }
+    .menu-name { font-family: 'Poppins', sans-serif; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #C9D6EA; }
+    h2 { font-family: 'Poppins', sans-serif; font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: #7F515F; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid #dee3ea; text-align: center; }
+    .burger-desc { font-size: 13px; color: #555; line-height: 1.6; text-align: center; margin-bottom: 24px; font-style: italic; max-width: 500px; margin-inline: auto; }
+    .toppings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+    .toppings-group { background: #f5f6f8; border: 1px solid #dee3ea; border-radius: 8px; padding: 16px; }
+    .toppings-label { font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: #2C3E50; margin-bottom: 4px; display: block; }
+    .toppings-note { font-size: 10px; color: #555; font-style: italic; margin-bottom: 10px; display: block; }
+    .list-plain { list-style: none; padding: 0; text-align: center; }
+    .list-plain li { font-size: 12px; color: #2C3E50; padding: 3px 0; border-bottom: 1px solid #dee3ea; }
+    .list-plain li:last-child { border-bottom: none; }
+    .toppings-group .list-plain { text-align: left; }
+    .cols-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+    .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+    .pkg-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 28px; }
+    .pkg-card { background: #f5f6f8; border: 1px solid #dee3ea; border-radius: 8px; padding: 14px; text-align: center; }
+    .pkg-name { font-family: 'Poppins', sans-serif; font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #2C3E50; margin-bottom: 6px; }
+    .pkg-price { font-family: 'Abril Fatface', serif; font-size: 36px; color: #7F515F; line-height: 1; }
+    .section { margin-bottom: 32px; }
+    .footer { margin-top: 28px; padding-top: 14px; border-top: 1px solid #dee3ea; text-align: center; font-size: 10px; color: #2C3E50; opacity: 0.45; }
+    @media print { body { padding: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; } @page { margin: 0.5in; size: letter; } }
+  </style>
+</head>
+<body>
+
+  <div class="header-card">
+    <div class="brand-wordmark">GATHER</div>
+    <div class="brand-tagline">From Dawn to Dusk</div>
+    <div class="header-rule"></div>
+    <div class="menu-name">Smash Burger Services</div>
+  </div>
+
+  <div class="section">
+    <h2>Gather Double Smash Burger</h2>
+    <p class="burger-desc">Two fresh 4oz. smash patties of seasoned ground beef with crispy edges and deep flavor. Topped with melted American cheese, crisp leaf lettuce, shaved white onion, dill pickle chips, and our house smash sauce on a butter-brioche bun.</p>
+
+    <div class="toppings-grid">
+      <div class="toppings-group">
+        <span class="toppings-label">Standard Toppings</span>
+        <span class="toppings-note">Included with every burger</span>
+        <ul class="list-plain">
+          <li>Leaf Lettuce</li>
+          <li>Sliced Onion</li>
+          <li>Sliced Tomato</li>
+          <li>Pickle Chips</li>
+        </ul>
+      </div>
+      <div class="toppings-group">
+        <span class="toppings-label">Premium Toppings</span>
+        <span class="toppings-note">Additional $5 per person</span>
+        <ul class="list-plain">
+          <li>Bacon Strips</li>
+          <li>Fried Egg</li>
+          <li>Caramelized Onions</li>
+          <li>Blue Cheese Crumbles</li>
+          <li>Avocado Slices</li>
+          <li>Guacamole</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Side Selections</h2>
+    <div class="cols-3">
+      <ul class="list-plain"><li>Fresh Cut Fries</li><li>Macaroni &amp; Cheese</li></ul>
+      <ul class="list-plain"><li>Kettle Chips</li><li>Garden Green Salad</li></ul>
+      <ul class="list-plain"><li>Dill Pickle Spear</li></ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Choice of Drink</h2>
+    <div class="cols-2">
+      <ul class="list-plain"><li>Canned Soda</li></ul>
+      <ul class="list-plain"><li>Bottled Water</li></ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Pricing</h2>
+    <div class="pkg-grid">
+      <div class="pkg-card">
+        <div class="pkg-name">Burger Only</div>
+        <div class="pkg-price">$12</div>
+      </div>
+      <div class="pkg-card">
+        <div class="pkg-name">Burger + One Side</div>
+        <div class="pkg-price">$17</div>
+      </div>
+      <div class="pkg-card">
+        <div class="pkg-name">Burger + Two Sides</div>
+        <div class="pkg-price">$20</div>
+      </div>
+      <div class="pkg-card">
+        <div class="pkg-name">Burger + One Side + Drink</div>
+        <div class="pkg-price">$19</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">gathercateringandevents.com &nbsp;•&nbsp; info@gathercateringandevents.com</div>
+
+</body>
+</html>

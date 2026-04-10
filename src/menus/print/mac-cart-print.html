@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mac Cart Menu | Gather</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #fff; color: #2C3E50; font-family: 'Source Sans 3', sans-serif; font-size: 13px; line-height: 1.5; padding: 32px; }
+    .header-card { background: #2C3E50; border-radius: 10px; padding: 32px 40px 24px; text-align: center; margin-bottom: 36px; }
+    .brand-wordmark { font-family: 'Abril Fatface', serif; font-size: 72px; color: #F9E3B4; letter-spacing: 0.06em; line-height: 1; margin-bottom: 6px; }
+    .brand-tagline { font-family: 'Poppins', sans-serif; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #C9D6EA; opacity: 0.8; }
+    .header-rule { width: 50px; height: 1px; background: rgba(249,227,180,0.5); margin: 10px auto; }
+    .menu-name { font-family: 'Poppins', sans-serif; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #C9D6EA; }
+    h2 { font-family: 'Poppins', sans-serif; font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: #7F515F; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid #dee3ea; text-align: center; }
+    .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
+    .item { margin-bottom: 12px; text-align: center; }
+    .item-name { font-weight: 600; color: #2C3E50; font-size: 12px; display: block; margin-bottom: 2px; }
+    .item-desc { font-size: 11px; color: #555; line-height: 1.4; }
+    .pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
+    .pkg-card { background: #f5f6f8; border: 1px solid #dee3ea; border-radius: 8px; padding: 16px; text-align: center; }
+    .pkg-name { font-family: 'Poppins', sans-serif; font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #2C3E50; margin-bottom: 8px; }
+    .pkg-price { font-family: 'Abril Fatface', serif; font-size: 40px; color: #7F515F; line-height: 1; }
+    .section { margin-bottom: 32px; }
+    .list-plain { list-style: none; padding: 0; text-align: center; }
+    .list-plain li { font-size: 12px; color: #2C3E50; font-weight: 600; padding: 4px 0; border-bottom: 1px solid #dee3ea; }
+    .list-plain li:last-child { border-bottom: none; }
+    .footer { margin-top: 28px; padding-top: 14px; border-top: 1px solid #dee3ea; text-align: center; font-size: 10px; color: #2C3E50; opacity: 0.45; }
+    @media print { body { padding: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; } @page { margin: 0.5in; size: letter; } }
+  </style>
+</head>
+<body>
+
+  <div class="header-card">
+    <div class="brand-wordmark">GATHER</div>
+    <div class="brand-tagline">From Dawn to Dusk</div>
+    <div class="header-rule"></div>
+    <div class="menu-name">Mac Cart Services</div>
+  </div>
+
+  <div class="section">
+    <h2>Choice of One Mac Entree</h2>
+    <div class="cols-2">
+      <div class="item"><span class="item-name">Simple Mac</span><span class="item-desc">Just like it sounds!</span></div>
+      <div class="item"><span class="item-name">Hot Honey Pepperoni Mac</span><span class="item-desc">Mini pepperoni slices, hot honey, pepperoni ranch</span></div>
+      <div class="item"><span class="item-name">BBQ Chicken Mac</span><span class="item-desc">BBQ chicken, crushed spicy dill pickle kettle chips, BBQ sauce</span></div>
+      <div class="item"><span class="item-name">Buffalo Chicken Mac</span><span class="item-desc">Buffalo chicken, blue cheese, buffalo sauce, ranch</span></div>
+      <div class="item"><span class="item-name">Street Corn Mac</span><span class="item-desc">Roasted corn, cotija, tajin, lime, cilantro, mayo</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Choice of One Side</h2>
+    <div class="cols-2">
+      <ul class="list-plain"><li>Bavarian Pretzel Bites</li></ul>
+      <ul class="list-plain"><li>Garlic Knot</li></ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Choice of One Drink</h2>
+    <div class="cols-2">
+      <ul class="list-plain"><li>Canned Soda</li></ul>
+      <ul class="list-plain"><li>Bottled Water</li></ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Pricing</h2>
+    <div class="pkg-grid">
+      <div class="pkg-card">
+        <div class="pkg-name">Entree Only</div>
+        <div class="pkg-price">$14</div>
+      </div>
+      <div class="pkg-card">
+        <div class="pkg-name">Entree + Side</div>
+        <div class="pkg-price">$16.50</div>
+      </div>
+      <div class="pkg-card">
+        <div class="pkg-name">Entree + Side + Drink</div>
+        <div class="pkg-price">$19.50</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">gathercateringandevents.com &nbsp;•&nbsp; info@gathercateringandevents.com</div>
+
+</body>
+</html>

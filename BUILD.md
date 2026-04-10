@@ -42,13 +42,39 @@ src/
 │   ├── inquiry.html            Inquiry form (uses body-close-form.html)
 │   ├── testimonials.html       Testimonials
 │   └── policies.html           Policies (temporarily skipped by build)
-└── services/
-    ├── full-planning.html
-    ├── day-of-coordinating.html
-    ├── mobile-bartending.html
-    ├── catering.html
-    ├── catering-staffing.html
-    └── mobile-food-cart.html
+├── services/
+│   ├── full-planning.html
+│   ├── day-of-coordinating.html
+│   ├── mobile-bartending.html
+│   ├── catering.html
+│   ├── catering-staffing.html
+│   └── mobile-food-cart.html
+└── menus/
+    ├── individual-meal.html
+    ├── breakfast.html
+    ├── lunch.html
+    ├── small-bites.html
+    ├── breakfast-cart.html
+    ├── mac-cart.html
+    ├── smash-burger-cart.html
+    └── print/                  Standalone print-optimized HTML files (not built by build.sh)
+        ├── individual-meal-print.html
+        ├── breakfast-print.html
+        ├── lunch-print.html
+        ├── small-bites-print.html
+        ├── breakfast-cart-print.html
+        ├── mac-cart-print.html
+        └── smash-burger-cart-print.html
+
+gather-menus/
+└── pdfs/                       Source PDFs committed to the repo
+    ├── individual-meal-menu.pdf
+    ├── breakfast-menu.pdf
+    ├── lunch-menu.pdf
+    ├── small-bites.pdf
+    ├── breakfast-cart.pdf
+    ├── mac-cart.pdf
+    └── smash-burger-cart.pdf
 ```
 
 ## Source File Format
@@ -116,10 +142,40 @@ Edit the source file in `src/pages/` or `src/services/`, then run `./build.sh`.
 Add the `<link>` tag to `src/_partials/head-bottom.html`, then run `./build.sh`. All 12 pages will include it.
 
 ### To add a new page
-1. Create a source file in `src/pages/` (or `src/services/` for service pages)
+1. Create a source file in `src/pages/` (or `src/services/` for service pages, `src/menus/` for menu pages)
 2. Add the front matter comments (`TITLE`, `DESC`)
 3. If the page needs a canonical URL or sitemap entry, it will be handled automatically
 4. Run `./build.sh`
+
+### To update a menu PDF
+The PDF download links on menu pages point to `publish/menus/pdfs/`. The source PDFs live in `gather-menus/pdfs/` and are copied into `publish/` by `build.sh`.
+
+To regenerate a PDF after editing a print HTML file:
+1. Edit the corresponding file in `src/menus/print/`
+2. Serve the project locally (so Google Fonts loads): `python3 -m http.server 8989`
+3. Generate the PDF with Chrome headless:
+   ```bash
+   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+     --headless=new --disable-gpu --no-sandbox \
+     --print-to-pdf="$(pwd)/gather-menus/pdfs/MENU-NAME.pdf" \
+     --print-to-pdf-no-header \
+     "http://localhost:8989/src/menus/print/MENU-NAME-print.html"
+   ```
+4. Kill the HTTP server (`kill $(lsof -ti :8989)`)
+5. Run `./build.sh` — this copies the new PDF to `publish/menus/pdfs/`
+6. Commit `gather-menus/pdfs/MENU-NAME.pdf` along with the HTML changes
+
+**PDF filenames and their source print files:**
+
+| PDF (`gather-menus/pdfs/`) | Print HTML (`src/menus/print/`) |
+|---|---|
+| `individual-meal-menu.pdf` | `individual-meal-print.html` |
+| `breakfast-menu.pdf` | `breakfast-print.html` |
+| `lunch-menu.pdf` | `lunch-print.html` |
+| `small-bites.pdf` | `small-bites-print.html` |
+| `breakfast-cart.pdf` | `breakfast-cart-print.html` |
+| `mac-cart.pdf` | `mac-cart-print.html` |
+| `smash-burger-cart.pdf` | `smash-burger-cart-print.html` |
 
 ### To add a new script to all pages
 Add the `<script>` tag to `src/_partials/body-close.html` (and `body-close-form.html` if it should also appear on the inquiry page).
@@ -139,3 +195,40 @@ find src/ -name '*.html' | entr ./build.sh
 # Using fswatch (brew install fswatch)
 fswatch -o src/ | xargs -n1 ./build.sh
 ```
+
+---
+
+## Deploying to the Server
+
+The site is served by Nginx from `publish/`. After pulling new changes on the server, always run `./build.sh` to regenerate the output — **do not copy `publish/` directly from the repo**, as `build.sh` injects cache-busting timestamps that must be generated fresh on each deploy.
+
+### Deploy steps
+
+```bash
+# 1. Pull latest changes
+git pull origin main
+
+# 2. Rebuild output (timestamps regenerated, PDFs copied in)
+./build.sh
+
+# 3. Copy publish/ to the Nginx web root (adjust path as needed)
+rsync -a --delete publish/ /var/www/gather-website/
+# OR if Nginx already points at publish/:
+#   nothing extra needed — build.sh writes directly to publish/
+
+# 4. Reload Nginx (optional — only needed if nginx.conf changed)
+nginx -s reload
+```
+
+### What build.sh does on deploy
+- Assembles all HTML pages from `src/` partials + page sources into `publish/`
+- Injects a fresh Unix timestamp into every CSS/JS URL for cache-busting
+- Copies `images/`, `css/`, `js/` into `publish/`
+- Copies PDF downloads from `gather-menus/pdfs/` → `publish/menus/pdfs/`
+- Generates `publish/sitemap.xml` and `publish/robots.txt`
+
+### Config file (required — not in repo)
+`js/config.js` is gitignored (it contains deployment-specific values). It must exist at `publish/js/config.js` on the server. See `api/DEPLOY.md` for details.
+
+### Nginx config
+Reference config is at `deploy/nginx.conf`. It disables browser caching for HTML/CSS/JS during active development — adjust `Cache-Control` headers when ready for production caching.

@@ -10,7 +10,8 @@
   // Determine path prefix based on page location relative to site root.
   // Pages in subdirectories (e.g. /services/) need '../' to reach root assets.
   const pathSegments = window.location.pathname.replace(/\/[^/]*\.html$/, '').split('/').filter(Boolean);
-  const prefix = pathSegments.length > 0 && window.location.pathname.includes('/services/') ? '../' : '';
+  const isSubdir = pathSegments.length > 0 && (window.location.pathname.includes('/services/') || window.location.pathname.includes('/menus/'));
+  const prefix = isSubdir ? '../' : '';
 
   /** Helper: prepend the path prefix to a relative path. */
   function url(path) {
@@ -25,6 +26,16 @@
     { label: 'Catering', href: 'services/catering.html' },
     { label: 'Catering Staffing', href: 'services/catering-staffing.html' },
     { label: 'Mobile Food Cart', href: 'services/mobile-food-cart.html' }
+  ];
+
+  const MENU_LINKS = [
+    { label: 'Individual Meal Menu', href: 'menus/individual-meal.html' },
+    { label: 'Breakfast Menu', href: 'menus/breakfast.html' },
+    { label: 'Lunch Menu', href: 'menus/lunch.html' },
+    { label: 'Small Bites & Stations', href: 'menus/small-bites.html' },
+    { label: 'Breakfast Cart', href: 'menus/breakfast-cart.html' },
+    { label: 'Mac Cart', href: 'menus/mac-cart.html' },
+    { label: 'Smash Burger Cart', href: 'menus/smash-burger-cart.html' }
   ];
 
   const PAGE_LINKS = [
@@ -57,8 +68,14 @@
     }).join('\n              ');
   }
 
+  function buildMenuDropdownItems() {
+    return MENU_LINKS.map(function (link) {
+      return '<li><a href="' + url(link.href) + '">' + link.label + '</a></li>';
+    }).join('\n              ');
+  }
+
   function buildFooterLinks() {
-    return SERVICE_LINKS.concat(PAGE_LINKS).map(function (link) {
+    return SERVICE_LINKS.concat(MENU_LINKS).concat(PAGE_LINKS).map(function (link) {
       return '<a href="' + url(link.href) + '">' + link.label + '</a>';
     }).join('\n        ');
   }
@@ -80,6 +97,14 @@
             '</button>' +
             '<ul class="nav-dropdown-menu">' +
               buildServiceDropdownItems() +
+            '</ul>' +
+          '</li>' +
+          '<li class="nav-dropdown">' +
+            '<button class="nav-dropdown-toggle" aria-expanded="false">' +
+              'Menus <span class="arrow" aria-hidden="true">&#9660;</span>' +
+            '</button>' +
+            '<ul class="nav-dropdown-menu">' +
+              buildMenuDropdownItems() +
             '</ul>' +
           '</li>' +
           PAGE_LINKS.map(function (link) {

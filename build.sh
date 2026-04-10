@@ -28,6 +28,7 @@ BASE_URL="${BASE_URL:-https://gathercateringandevents.com}"
 echo "Building site..."
 rm -rf "$OUT_DIR"
 mkdir -p "$OUT_DIR/services"
+mkdir -p "$OUT_DIR/menus"
 
 # ── Copy static assets ────────────────────────────────────────────────────────
 
@@ -104,6 +105,18 @@ for src in "$SCRIPT_DIR"/src/services/*.html; do
   build_page "$src" "$OUT_DIR/services/$name" "../"
 done
 
+# Menu pages (../ prefix to reach assets in publish/)
+for src in "$SCRIPT_DIR"/src/menus/*.html; do
+  name="$(basename "$src")"
+  build_page "$src" "$OUT_DIR/menus/$name" "../"
+done
+
+# Copy menu PDFs if they exist
+if [ -d "$SCRIPT_DIR/gather-menus/pdfs" ]; then
+  mkdir -p "$OUT_DIR/menus/pdfs"
+  cp "$SCRIPT_DIR/gather-menus/pdfs/"*.pdf "$OUT_DIR/menus/pdfs/" 2>/dev/null || true
+fi
+
 # ── Generate sitemap.xml ──────────────────────────────────────────────────────
 
 TODAY="$(date +%Y-%m-%d)"
@@ -117,6 +130,9 @@ TODAY="$(date +%Y-%m-%d)"
   for service in catering-staffing catering day-of-coordinating full-planning mobile-bartending mobile-food-cart; do
     printf '  <url><loc>%s/services/%s.html</loc><lastmod>%s</lastmod><priority>0.9</priority></url>\n' "$BASE_URL" "$service" "$TODAY"
   done
+  for menu in individual-meal breakfast lunch small-bites breakfast-cart mac-cart smash-burger-cart; do
+    printf '  <url><loc>%s/menus/%s.html</loc><lastmod>%s</lastmod><priority>0.8</priority></url>\n' "$BASE_URL" "$menu" "$TODAY"
+  done
   printf '</urlset>\n'
 } > "$OUT_DIR/sitemap.xml"
 echo "  $OUT_DIR/sitemap.xml"
@@ -126,4 +142,4 @@ echo "  $OUT_DIR/sitemap.xml"
 sed "s|{{BASE_URL}}|${BASE_URL}|g" "$SCRIPT_DIR/robots.txt" > "$OUT_DIR/robots.txt"
 echo "  $OUT_DIR/robots.txt"
 
-echo "Done. Built $(ls "$OUT_DIR"/*.html "$OUT_DIR"/services/*.html 2>/dev/null | wc -l | tr -d ' ') pages."
+echo "Done. Built $(ls "$SCRIPT_DIR"/src/pages/*.html "$SCRIPT_DIR"/src/services/*.html "$SCRIPT_DIR"/src/menus/*.html 2>/dev/null | wc -l | tr -d ' ') pages."
