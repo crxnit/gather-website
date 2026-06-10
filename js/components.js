@@ -20,12 +20,12 @@
 
   // Single source of truth for navigation links — used by both header and footer.
   const SERVICE_LINKS = [
-    { label: 'Full Planning', href: 'services/full-planning.html' },
-    { label: 'Day-of Coordinating', href: 'services/day-of-coordinating.html' },
-    { label: 'Mobile Bartending', href: 'services/mobile-bartending.html' },
     { label: 'Catering', href: 'services/catering.html' },
+    { label: 'Mobile Food Cart', href: 'services/mobile-food-cart.html' },
+    { label: 'Day-of Coordinating', href: 'services/day-of-coordinating.html' },
+    { label: 'Full Planning', href: 'services/full-planning.html' },
     { label: 'Catering Staffing', href: 'services/catering-staffing.html' },
-    { label: 'Mobile Food Cart', href: 'services/mobile-food-cart.html' }
+    { label: 'Mobile Bartending', href: 'services/mobile-bartending.html' }
   ];
 
   const MENU_LINKS = [

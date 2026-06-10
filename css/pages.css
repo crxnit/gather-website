@@ -525,6 +525,17 @@
   line-height: var(--line-height-relaxed);
 }
 
+.menu-page__allergen {
+  max-width: var(--container-narrow);
+  margin-inline: auto;
+  margin-bottom: var(--space-xl);
+  text-align: center;
+  font-size: var(--text-base);
+  color: var(--color-text);
+  line-height: var(--line-height-relaxed);
+  font-style: italic;
+}
+
 @media (min-width: 768px) {
   .menu-page {
     padding-block: var(--space-2xl);
@@ -536,6 +547,11 @@
   }
 
   .menu-page__intro {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .menu-page__allergen {
     font-size: var(--text-lg);
     margin-bottom: var(--space-2xl);
   }
